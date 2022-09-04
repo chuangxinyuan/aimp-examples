@@ -24,7 +24,7 @@ import aimpInferWorkFlowSDK
 #start init the aimpinferWorkFlowSDK
 aimpPredict=aimpInferWorkFlowSDK.aimpInfer()
 aimpPredict.namespace = 'mp'
-aimpPredict.model_name = 'efficientnet-v2-simple-tfserving'
+aimpPredict.model_name = 'efficientnet-v2-small-tfserving'
 aimpPredict.getAccess()
 access_token=aimpPredict.api_access_token
 endpoint=aimpPredict.infer_endpoint
