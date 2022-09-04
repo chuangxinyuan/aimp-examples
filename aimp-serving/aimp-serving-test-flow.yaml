@@ -1,0 +1,54 @@
+arguments:
+  parameters:
+
+    - name: project-url
+      value: 'https://github.com/chuangxinyuan/{{workflow.parameters.project-name}}.git'
+
+    - name: project-name
+      value: aimp-examples
+    - displayName: Node pool
+      hint: Name of node pool or group to run this workflow task
+      name: sys-node-pool
+      required: true
+      type: select.nodepool
+      value: 'Standard_B8ms'
+      visibility: public
+    - name: sample-name
+      type: select.select
+      value: faster-rcnn-torchserve
+      options:
+        - name: faster-rcnn-torchserve
+          value: faster-rcnn-torchserve
+        - name: efficientnet-v2-tfserving
+          value: efficientnet-v2-tfserving
+        - name: efficientnet-v2-simple-tfserving
+          value: efficientnet-v2-simple-tfserving          
+        - name: yelp-polarity-triton
+          value: yelp-polarity-triton
+        - name: yolov5s-tfserving
+          value: yolov5s-tfserving
+        - name: yolox-onnx-triton
+          value: yolox-onnx-triton
+entrypoint: main
+templates:
+  - name: main
+    dag:
+      tasks:
+        - name: inference-model
+          template: inference-model
+
+  - name: inference-model
+    script:
+      image: 'continuumio/miniconda3'
+      imagePullPolicy: IfNotPresent
+      workingDir: '/mnt/src/{{workflow.parameters.project-name}}/aimp-serving/aimp-serving-test/{{workflow.parameters.sample-name}}'
+      command:
+        - sh
+        - -c
+      args: [pip3 install requests; pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple transformers; pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple numpy; pip3 install -i  https://pypi.tuna.tsinghua.edu.cn/simple onepanel-sdk==1.0.1; python3 run.py  ]
+    inputs:
+      artifacts:
+        - git:
+            repo: '{{workflow.parameters.project-url}}'
+          name: src
+          path: '/mnt/src/{{workflow.parameters.project-name}}'

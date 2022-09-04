@@ -14,53 +14,22 @@ from onepanel.core.api.rest import ApiException
 import onepanel.core.auth
 from pprint import pprint
 
+# MUST import AIMP python SDK
+# import upper dir's python file
+import sys
+sys.path.append("../..") 
+sys.path.append("..") 
+import aimpInferWorkFlowSDK
 
-# ## Get Onepanel Access Token for network requests
+#start init the aimpinferWorkFlowSDK
+aimpPredict=aimpInferWorkFlowSDK.aimpInfer()
+aimpPredict.namespace = 'mp'
+aimpPredict.model_name = 'efficientnet-v2-tfserving'
+aimpPredict.getAccess()
+access_token=aimpPredict.api_access_token
+endpoint=aimpPredict.infer_endpoint
+#end init the aimpinferSDK
 
-# In[2]:
-
-
-# If inside of Onepanel, get mounted service account token to use as API Key
-access_token = onepanel.core.auth.get_access_token()
-
-print('---ONEPANEL_API_URL----', os.getenv('ONEPANEL_API_URL'))
-# Configure API key authorization: Bearer
-configuration = onepanel.core.api.Configuration(
-    host=os.getenv('ONEPANEL_API_URL'),
-    api_key={
-        'authorization': access_token
-    }
-)
-configuration.api_key_prefix['authorization'] = 'Bearer'
-
-
-# In[5]:
-
-
-namespace = 'mp'
-model_name = 'efficientnet-v2-tfserving'
-
-
-# In[6]:
-
-
-# Get status, endpoint
-with onepanel.core.api.ApiClient(configuration) as api_client:
-    api_instance = onepanel.core.api.InferenceServiceApi(api_client)
-
-    try:
-        ready = False
-        while not ready:
-            api_response = api_instance.get_inference_service(namespace, model_name)
-            ready = api_response.ready
-            endpoint = api_response.predict_url
-            print('---api_response.predict_url---', endpoint)
-            time.sleep(1)
-    except ApiException as e:
-        print("Exception when calling InferenceServiceApi->get_inference_service_status: %s\n" % e)
-
-
-# In[8]:
 
 with open('./img.pkl','rb') as f:
     img_data = pickle.load(f)
@@ -69,10 +38,9 @@ data = {
     'instances': img_data
 }
 
-
-
 headers = {
-    'onepanel-access-token': access_token
+    'onepanel-access-token': access_token,
+    'Content-Type': 'application/json',
 }
 
 

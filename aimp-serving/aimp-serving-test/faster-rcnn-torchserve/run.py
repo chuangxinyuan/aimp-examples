@@ -13,10 +13,10 @@ import onepanel.core.api
 from onepanel.core.api.rest import ApiException
 import onepanel.core.auth
 from pprint import pprint
-import sys
 
 # MUST import AIMP python SDK
 # import upper dir's python file
+import sys
 sys.path.append("../..") 
 sys.path.append("..") 
 import aimpInferWorkFlowSDK
@@ -27,11 +27,8 @@ aimpPredict.namespace = 'mp'
 aimpPredict.model_name = 'faster-rcnn-torchserve'
 aimpPredict.getAccess()
 access_token=aimpPredict.api_access_token
-infer_endpoint=aimpPredict.infer_endpoint
+endpoint=aimpPredict.infer_endpoint
 #end init the aimpinferSDK
-
-# If inside of Onepanel, get mounted service account token to use as API Key
-access_token = onepanel.core.auth.get_access_token()
 
 import base64
 image = open('./persons.jpg', 'rb') #open binary file in read mode
@@ -51,12 +48,12 @@ headers = {
 }
 
 print('---api_predict_endpoint and headers---')
-print (infer_endpoint)
+print (endpoint)
 pprint(headers)
 print('\n')
 
 print('---Prediction RESULTS---')
 # original predict URL
-r = requests.post(infer_endpoint, headers=headers, data=json.dumps(data), verify=False)
+r = requests.post(endpoint, headers=headers, data=json.dumps(data), verify=False)
 result = r.json()
 pprint(result)
