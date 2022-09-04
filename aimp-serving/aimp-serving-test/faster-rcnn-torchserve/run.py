@@ -22,7 +22,7 @@ sys.path.append("..")
 import aimpInferWorkFlowSDK
 
 #start init the aimpinferWorkFlowSDK
-aimpPredict=aimpInferFlowSDK.aimpInfer()
+aimpPredict=aimpInferWorkFlowSDK.aimpInfer()
 aimpPredict.namespace = 'mp'
 aimpPredict.model_name = 'faster-rcnn-torchserve'
 aimpPredict.getAccess()
