@@ -1,0 +1,18 @@
+apiVersion: "serving.kubeflow.org/v1beta1"
+kind: "InferenceService"
+metadata:
+  namespace: mp
+  name: "efficientnet-v2-tfserving"
+ 
+spec:
+  predictor:
+    tensorflow:
+      resources:
+        limits:
+          cpu: 4
+          memory: 16Gi
+        requests:
+          cpu: 2
+          memory: 8Gi
+      runtimeVersion: 2.2.0
+      storageUri: "https://models.blob.core.chinacloudapi.cn/cv-models/efficientnet-v2-tfserving.zip"
