@@ -53,7 +53,7 @@ class aimpInfer:
         try:
            ready = False
            while not ready:
-               api_response = api_instance.get_inference_service(namespace, model_name)
+               api_response = api_instance.get_inference_service(self.namespace, self.model_name)
                ready = api_response.ready
                endpoint = api_response.predict_url
                print('---api_response.predict_url---', endpoint)
