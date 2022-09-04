@@ -1,0 +1,18 @@
+apiVersion: "serving.kubeflow.org/v1beta1"
+kind: "InferenceService"
+metadata:
+  namespace: mp
+  name: "iris"
+ 
+spec:
+  predictor:
+    sklearn:
+      resources:
+        limits:
+          cpu: 1
+          memory: 4Gi
+        requests:
+          cpu: 1
+          memory: 4Gi
+      runtimeVersion: v0.6.1
+      storageUri: "https://models.blob.core.chinacloudapi.cn/ml-models/sklearn_0.20.3_model.zip"
