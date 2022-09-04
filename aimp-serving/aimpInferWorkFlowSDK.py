@@ -47,7 +47,7 @@ class aimpInfer:
 
 
         # Get status, endpoint
-        with onepanel.core.api.ApiClient(configuration) as api_client:
+        api_client=onepanel.core.api.ApiClient(configuration)
         api_instance = onepanel.core.api.InferenceServiceApi(api_client)
 
         try:
