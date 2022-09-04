@@ -13,6 +13,7 @@ import onepanel.core.api
 from onepanel.core.api.rest import ApiException
 import onepanel.core.auth
 from pprint import pprint
+import sys
 
 # MUST import AIMP python SDK
 # import upper dir's python file
