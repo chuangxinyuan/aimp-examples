@@ -3,7 +3,6 @@ arguments:
 
     - name: project-url
       value: 'https://github.com/chuangxinyuan/{{workflow.parameters.project-name}}.git'
-
     - name: project-name
       value: aimp-examples
     - displayName: Node pool
@@ -29,6 +28,8 @@ arguments:
           value: yolov5s-tfserving
         - name: yolox-onnx-triton
           value: yolox-onnx-triton
+        - name: iris-sklearn
+          value: iris-sklearn          
 entrypoint: main
 templates:
   - name: main
