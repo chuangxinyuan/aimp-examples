@@ -1,0 +1,1 @@
+Same as efficientnet-v2-tfserving, except the model file is smaller for faster inference speed
