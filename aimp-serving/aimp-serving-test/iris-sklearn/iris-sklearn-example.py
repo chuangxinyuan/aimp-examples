@@ -53,5 +53,3 @@ r = requests.post(infer_endpoint, headers=headers, data=data, verify=False)
 result = r.json()
 pprint(result)
 
-
-

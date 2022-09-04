@@ -2,7 +2,7 @@ apiVersion: "serving.kubeflow.org/v1beta1"
 kind: "InferenceService"
 metadata:
   namespace: mp
-  name: "efficientnet-v2-small-tfserving"
+  name: "efficientnet-v2-simple-tfserving"
  
 spec:
   predictor:
