@@ -102,9 +102,9 @@ http://yelp-polarity-triton.mp.svc.cluster.local/v2/models/yelp-polarity-triton/
 
 * 模型部署
 1. 中台中点击"模型->创建模型服务"
-![图片](./pics/modelUI.jpg)
+* ![图片](./pics/modelUI.jpg)
 2. 把模型部署yaml文件粘贴到窗口，然后点击创建
-![图片](./pics/modelUI2.jpg)
+* ![图片](./pics/modelUI2.jpg)
 
 ## 模型部署调试方法
 * 模型部署后，使用命令 `kubectl get pod -n <namepace>`, 观察部署的模型对应的pod的状态
