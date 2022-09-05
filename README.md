@@ -15,9 +15,12 @@
 原生的功能和支持的AI模型类型列表和相应的例子请参见：
 [model servers](./docs/samples/README.md)
 
+## 公开模型使用方法
+1. 登陆中台，运行aimp-serving-examples 工作流，选择sample-name 下面的模型，然后执行，可以从流日志中查看相应的执行效果。查看aimp-serving/aimp-serving-test 目录下的具体模型目录中的run.py，了解程序运行的细节。
+2. 进入aimp-serving/aimp-serving-test 目录下的具体的模型目录，运行<模型名字-example.py>程序，查看执行效果。
+   
 # 模型推理服务使用方式
 * 中台推理服务的地址是 https://infer.dev.aimpcloud.cn (实际的地址根据部署的情况不同会有差异，实际的地址请向管理员索取）。
-
 * 仪电人工智能中台的地址和推理服务地址是不同的地址。如下示例中，假定中台的地址为http://onepanel.niuhongxing.cn ，推理服务的地址是 https://infer.dev.aimpcloud.cn。 则推理服务的使用方法如下：
 
 ## 准备工作：
@@ -89,6 +92,28 @@ http://yelp-polarity-triton.mp.svc.cluster.local/v2/models/yelp-polarity-triton/
 ```
 
 # 模型部署和调试
+## 使用自定义的predictor镜像
+以sklearn的镜像为例, 使用自定义的sklearn的predictor镜像:
+- 把镜像增加到 kfserving-system名字空间下的inferenceservice-config configmap，可以使用命令 `kubectl edit cm inferenceservice-config -n kfserving-system`，修改如下部分
+```yaml
+        "sklearn": {
+            "image": "<your-dockerhub-id>/kfserving/sklearnserver",
+            "defaultImageVersion": "v0.6.1"
+        },
+```
+- 在模型部署yaml文件中指定 `runtimeVersion` 
+```yaml
+apiVersion: "serving.kubeflow.org/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "sklearn-iris"
+spec:
+  predictor:
+    sklearn:
+      storageUri: "gs://kfserving-samples/models/sklearn/iris"
+      runtimeVersion: X.X.X
+```
+- 如果不指定 runtimeversion, 则使用inferenceservice-config configmap中的`defaultImageVersion`
 ## 模型部署yaml文件编写
 * 登陆中台后，编写模型部署的yaml文件，然后在中台的模型发布页面中进行发布，模型部署yaml文件注意如下关键字段：
 1. name: 模型的名字很关键，是做为模型推理服务URL的一部分
@@ -111,20 +136,54 @@ http://yelp-polarity-triton.mp.svc.cluster.local/v2/models/yelp-polarity-triton/
 * 使用命令 `kubectl logs <pod name> -n <namespace> --all-containers`，查看pod中所有容器的状态
 * 使用命令 `kubectl exec -it <pod name> -n <namespace> -c <container name> -- bash` 进入容器观察运行的情况
 * 使用命令 `kubectl get isvc -n <namespace>`查看模型服务的状态和url等
-## 模型的结构和打包方法
+# 模型的结构和打包方法 
+## Triton onnx 模型准备
+## TF Serving 模型准备
+## Torch Serve模型准备
+例子[参考 ](./aimp-serving/aimp-serving-test/faster-rcnn-torchserve)
+* 模型结构
+```bash
+├── config
+│   ├── config.properties
+├── model-store
+│   ├── *.mar
+│   ├── *.mar
+```
+1. 下载预训练模型，或训练模型
+2. 打包成TorchServe Model Archive Files (MAR)--faster-rcnn-torchserve .mar
+3. 准备目录, 新建上述的config 和model-store目录
+4. 生成的*.mar放入model-store文件夹,打包命令[参考 ](./aimp-serving/aimp-serving-test/faster-rcnn-torchserve/READEME.md)
+5. 在config文件夹下新建config.propertites，[参考 ](./aimp-serving/aimp-serving-test/faster-rcnn-torchserve/READEME.md)
+6. 打包成zip文件, `zip faster-rcnn-torchserve.zip model-store config `
+## Triton 模型准备
+## sklearn 模型准备
+* 模型结构
+一个文件，名字是model.joblib
+```bash
+├── model.joblib
+```
+* 打包
+1. 保存的模型文件名字须是model.joblib
+2. 模型训练代码，可以参考[例子](./aimp-serving/aimp-serving-test/iris-sklearn/iris-train.py)
+3. 打包： ` zip iris-sklearn.zip model.joblib`
+## 上传模型文件
+上传到模型仓库对应的目录下（cv-models或nlp-models等），并生成可以下载的链接，在模型定义yaml的 uri字段中使用。
+ 
 # 模型仓库
 ## 模型仓库目录结构
 * AIMP模型仓库位于azure cn 的对象存储中，目录结构如下
 ```
-<models>
-   <cv-models>/
+<models> #模型仓库
+   <cv-models>/ #机器视觉相关算法
       <efficient-v2-small-tfserving.zip>
       <efficientnet-v2-tfserving.zip>
       <faster-rcnn-pytorch.zip>
       ...
-   <nlp-models>/
+   <nlp-models>/  #自然语言相关算法
       <yelp-polarity-triton.zip>
       ...
+   <ml-models>/  #机器学习相关算法
+      <iris-sklearn.zip>
    ...
 ```
 
