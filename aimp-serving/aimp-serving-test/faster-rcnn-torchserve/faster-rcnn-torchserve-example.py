@@ -42,7 +42,8 @@ print (infer_endpoint)
 pprint(headers)
 print('\n')
 
-image = open('./persons.jpg', 'rb') #open binary file in read mode
+path = './persons.jpg'
+image = open(path, 'rb') #open binary file in read mode
 image_read = image.read()
 image_64_encode = base64.b64encode(image_read)
 bytes_array = image_64_encode.decode('utf-8')
@@ -58,8 +59,30 @@ print('---Prediction RESULTS---')
 # skip cert check
 r = requests.post(infer_endpoint, headers=headers, data=json.dumps(data), verify=False)
 result = r.json()
-pprint(result)
+print(result)
 
+pic_result = out['predictions'][0] #the result of one picture
+
+##screen result
+list1 = []
+for i in pic_result:
+    if i['score'] > 0.8:
+        list1.append(i)
+
+#draw the frame
+img = cv2.imread(path)
+img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+for ret in list1:
+    for k, v in ret.items():
+        if k == 'score':
+            pass
+        else:
+            x1, y1, x2, y2 = [int(i) for i in v]
+        
+            img = cv2.rectangle(img, (x1, y1), (x2, y2), (255, 255, 0), 6)
+            img = cv2.putText(img,k,(x1-5,y1-10),cv2.FONT_HERSHEY_COMPLEX,4,(0,0,0),4)
+
+plt.imshow(img)
  
 
 
