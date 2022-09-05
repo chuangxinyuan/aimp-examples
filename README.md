@@ -5,7 +5,7 @@
 |名称|描述| 服务地址  |预测器| 模型格式| 模型文件下载地址| 版本| 文档 |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
 |efficientnet-v2-simple-tfserving|-|-| [Triton Inference Server](https://github.com/triton-inference-server/server) | [TensorFlow,TorchScript,ONNX,TensorRT](https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/model_repository.html)| v2 |[Compatibility Matrix](https://docs.nvidia.com/deeplearning/frameworks/support-matrix/index.html)| [README](./aimp-serving/aimp-serving-test/efficientnet-v2-simple-tfserving/READEME.md) |
-|efficientnet-v2-tfserving|-|-| [TFServing](https://www.tensorflow.org/tfx/guide/serving) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) | v1 |[README](./aimp-serving/aimp-serving-test/efficientnet-v2-tfserving/READEME.md)   |
+|efficientnet-v2-tfserving|-|-| [TFServing](https://www.tensorflow.org/tfx/guide/serving) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) | v1 ||[README](./aimp-serving/aimp-serving-test/efficientnet-v2-tfserving/READEME.md)   |
 |faster-rcnn-torchserve|-|-| [TorchServe](https://pytorch.org/serve/server.html) | [Eager Model/TorchScript](https://pytorch.org/docs/master/generated/torch.save.html) | v1 | 0.3.0 |[README](./aimp-serving/aimp-serving-test/faster-rcnn-torchserve/READEME.md)  |
 |iris-sklearn|-|-| [SKLearn KFServer](https://github.com/kubeflow/kfserving/tree/master/python/sklearnserver) | [Pickled Model](https://scikit-learn.org/stable/modules/model_persistence.html) 文件后缀为joblib| v1 | 0.20.3 | [README](./aimp-serving/aimp-serving-test/iris-sklearn/READEME.md) |
 |yelp-polarity-triton|-|-| [SKLearn KFServer](https://github.com/kubeflow/kfserving/tree/master/python/sklearnserver) | [Pickled Model](https://scikit-learn.org/stable/modules/model_persistence.html) 文件后缀为joblib| v1 | 0.20.3 | [README](./aimp-serving/aimp-serving-test/yelp-polarity-triton/READEME.md) |
@@ -88,7 +88,29 @@ http://yelp-polarity-triton.mp.svc.cluster.local/v2/models/yelp-polarity-triton/
     infer_endpoint=''
 ```
 
-# 模型部署方式
+# 模型部署和调试
+## 模型部署yaml文件编写
+* 登陆中台后，编写模型部署的yaml文件，然后在中台的模型发布页面中进行发布，模型部署yaml文件注意如下关键字段：
+1. name: 模型的名字很关键，是做为模型推理服务URL的一部分
+2. namespace: 模型部署到哪个名字空间中
+3. 模型的predictor的类型，是tensorflow，sklearn等
+4. runtimeVersion: predictor的版本 ，最好和kfserving-system名字空间下的inferenceservice-config configmap 中定义的版本保持一致。
+5. storageUri: 是模型文件的下载链接，AIMP的模型都是从azure的blob存储的文件链接
+6. request: 使用的资源数量，
+7. 其他字段比如nodeaffinity等可以查看InferenceService 支持的字段
+8. 例子可以参考aimp-serving目录下的模型中的部署定义文件
+
+* 模型部署
+1. 中台中点击"模型->创建模型服务"
+![图片](./pics/modelUI.jpg)
+2. 把模型部署yaml文件粘贴到窗口，然后点击创建
+![图片](./pics/modelUI2.jpg)
+
+## 模型部署调试方法
+* 模型部署后，使用命令 `kubectl get pod -n <namepace>`, 观察部署的模型对应的pod的状态
+* 使用命令 `kubectl logs <pod name> -n <namespace> --all-containers`，查看pod中所有容器的状态
+* 使用命令 `kubectl exec -it <pod name> -n <namespace> -c <container name> -- bash` 进入容器观察运行的情况
+* 使用命令 `kubectl get isvc -n <namespace>`查看模型服务的状态和url等
 ## 模型的结构和打包方法
 # 模型仓库
 ## 模型仓库目录结构
