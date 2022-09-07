@@ -26,18 +26,18 @@ infer_endpoint=aimpPredict.infer_endpoint
 #end init the aimpinferSDK
 
 # step 4 predict
-#with open('./img.pkl','rb') as f:
-    #img_data = pickle.load(f)
+with open('./cat1.pkl','rb') as f:
+    img_data = pickle.load(f)
     
-import cv2
-import matplotlib.pyplot as plt
-path = './cat1.jpg'
-img = cv2.imread(path)
-img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
-img = cv2.resize(img,(224,224))
-plt.imshow(img)
-img = img / 255.0
-img = np.expand_dims(img,axis = 0).tolist()
+#import cv2
+#import matplotlib.pyplot as plt
+#path = './cat1.jpg'
+#img = cv2.imread(path)
+#img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+#img = cv2.resize(img,(224,224))
+#plt.imshow(img)
+#img = img / 255.0
+#img_data = np.expand_dims(img,axis = 0).tolist()
 
 data = {
     'instances': img_data

@@ -27,15 +27,18 @@ endpoint=aimpPredict.infer_endpoint
 #end init the aimpinferSDK
 
 # step 4 predict
-import cv2
-path = './cat1.jpg'
-img = cv2.imread(path)
-img = cv2.resize(img,(224,224))
-img = img / 255.0
-img = np.expand_dims(img,axis = 3).astype(np.float32)
-img = np.transpose(img).astype('float32')
+with open('./cat.pkl','rb') as f:
+    img_data = pickle.load(f)
+    
+#import cv2
+#path = './cat1.jpg'
+#img = cv2.imread(path)
+#img = cv2.resize(img,(224,224))
+#img = img / 255.0
+#img = np.expand_dims(img,axis = 3).astype(np.float32)
+#img = np.transpose(img).astype('float32')
 #print(img.shape)
-img = img.tolist()
+#img = img.tolist()
 
 
 data = {
