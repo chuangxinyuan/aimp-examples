@@ -20,8 +20,8 @@ arguments:
           value: faster-rcnn-torchserve
         - name: efficientnet-v2-tfserving
           value: efficientnet-v2-tfserving
-        - name: efficientnet-v2-simple-tfserving
-          value: efficientnet-v2-simple-tfserving          
+        - name: efficientnet-v2-small-tfserving
+          value: efficientnet-v2-small-tfserving          
         - name: yelp-polarity-triton
           value: yelp-polarity-triton
         - name: yolov5s-tfserving
