@@ -8,6 +8,7 @@ import json
 import time
 import numpy as np 
 import requests
+import pickle
 from pprint import pprint
 
 # MUST import AIMP python SDK
@@ -19,7 +20,7 @@ import aimpInferSDK
 #start init the aimpinferSDK
 aimpPredict=aimpInferSDK.aimpInfer()
 aimpPredict.namespace = 'mp'
-aimpPredict.model_name = 'faster-rcnn-torchserve'
+aimpPredict.model_name = 'mobilenet-v3-small-tfserving'
 aimpPredict.username='admin'
 aimpPredict.token='5aed14f5bffc9f86fd0fb2745519f2ff'
 aimpPredict.aimp_host='http://onepanel.niuhongxing.cn/api'
@@ -31,6 +32,23 @@ infer_endpoint=aimpPredict.infer_endpoint
 #end init the aimpinferSDK
 
 # step 4 predict
+#with open('./img.pkl','rb') as f:
+    #img_data = pickle.load(f)
+    
+import cv2
+import matplotlib.pyplot as plt
+path = './cat1.jpg'
+img = cv2.imread(path)
+img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+img = cv2.resize(img,(224,224))
+plt.imshow(img)
+img = img / 255.0
+img = np.expand_dims(img,axis = 0).tolist()
+
+data = {
+    'instances': img_data
+}
+
 headers = {
     'onepanel-access-token': access_token,
     'Content-Type': 'application/json',
@@ -39,19 +57,8 @@ headers = {
 
 print('---api_predict_endpoint and headers---')
 print (infer_endpoint)
-pprint(headers)
+print(headers)
 print('\n')
-
-path = './persons.jpg'
-image = open(path, 'rb') #open binary file in read mode
-image_read = image.read()
-image_64_encode = base64.b64encode(image_read)
-bytes_array = image_64_encode.decode('utf-8')
-data = {
-    'instances': [
-        {'data': bytes_array}
-    ]
-}
 
 print('---Prediction RESULTS---')
 # original predict URL
@@ -60,29 +67,3 @@ print('---Prediction RESULTS---')
 r = requests.post(infer_endpoint, headers=headers, data=json.dumps(data), verify=False)
 result = r.json()
 print(result)
-
-pic_result = out['predictions'][0] #the result of one picture
-
-##screen result
-list1 = []
-for i in pic_result:
-    if i['score'] > 0.8:
-        list1.append(i)
-
-#draw the frame
-img = cv2.imread(path)
-img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
-for ret in list1:
-    for k, v in ret.items():
-        if k == 'score':
-            pass
-        else:
-            x1, y1, x2, y2 = [int(i) for i in v]
-        
-            img = cv2.rectangle(img, (x1, y1), (x2, y2), (255, 255, 0), 6)
-            img = cv2.putText(img,k,(x1-5,y1-10),cv2.FONT_HERSHEY_COMPLEX,4,(0,0,0),4)
-
-plt.imshow(img)
- 
-
-
