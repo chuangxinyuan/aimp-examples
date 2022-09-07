@@ -158,14 +158,14 @@ spec:
   │   │   ├── model.onnx
   ```
 
-  1. 下载预训练模型，或训练模型
-  2. 根据需要转成onnx模型，并且重命名为model.onnx
-  3. 准备目录, 新建上述的config.pbx[参考 ](./aimp-serving/aimp-serving-test/resnet50-onnx-triton/READEME.md)
-  4. 打包成zip文件, `zip -r  restnet50-onnx-triton.zip restnet50-onnx-triton `
+1. 下载预训练模型，或训练模型
+2. 根据需要转成onnx模型，并且重命名为model.onnx
+3. 准备目录, 新建上述的config.pbx[参考 ](./aimp-serving/aimp-serving-test/resnet50-onnx-triton/READEME.md)
+4. 打包成zip文件, `zip -r  restnet50-onnx-triton.zip restnet50-onnx-triton `
 
 ## TF Serving 模型准备
 
-例子[参考 ](./aimp-serving/aimp-serving-test/efficientnet-v2-tfserving)
+例子[参考 ](./aimp-serving/aimp-serving-test/efficientnet-v2-tfserving/READEME.md)
 
 * 模型结构
 
@@ -177,9 +177,9 @@ spec:
   │   │   ├── variables.index
   ```
 
-  1. 下载预训练模型，或训练模型
-  2. 根据需要转成saved_model格式
-  3. 打包成zip文件, `zip -r  efficientnet-v2-tfserving.zip 1 `
+1. 下载预训练模型，或训练模型
+2. 根据需要转成saved_model格式
+3. 打包成zip文件, `zip -r  efficientnet-v2-tfserving.zip 1 `
 
 ## Torch Serve模型准备
 
