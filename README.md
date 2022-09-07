@@ -96,7 +96,9 @@ http://yelp-polarity-triton.mp.svc.cluster.local/v2/models/yelp-polarity-triton/
 ```
 
 # 模型部署和调试
+
 ## 使用自定义的predictor镜像
+
 以sklearn的镜像为例, 使用自定义的sklearn的predictor镜像:
 - 把镜像增加到 kfserving-system名字空间下的inferenceservice-config configmap，可以使用命令 `kubectl edit cm inferenceservice-config -n kfserving-system`，修改如下部分
 ```yaml
@@ -142,8 +144,45 @@ spec:
 * 使用命令 `kubectl get isvc -n <namespace>`查看模型服务的状态和url等
 # 模型的结构和打包方法 
 ## Triton onnx 模型准备
+
+例子[参考 ](./aimp-serving/aimp-serving-test/resnet50-onnx-triton)
+
+* 模型结构
+
+  ```bash
+  ├──<model-name>
+  │   ├── config.pbtxt
+  │   ├── <version1>
+  │   │   ├── model.onnx
+  │   ├── <version2>
+  │   │   ├── model.onnx
+  ```
+
+  1. 下载预训练模型，或训练模型
+  2. 根据需要转成onnx模型，并且重命名为model.onnx
+  3. 准备目录, 新建上述的config.pbx[参考 ](./aimp-serving/aimp-serving-test/resnet50-onnx-triton/READEME.md)
+  4. 打包成zip文件, `zip -r  restnet50-onnx-triton.zip restnet50-onnx-triton `
+
 ## TF Serving 模型准备
+
+例子[参考 ](./aimp-serving/aimp-serving-test/efficientnet-v2-tfserving)
+
+* 模型结构
+
+  ```bash
+  ├──<version>
+  │   ├── savedmodel.pb
+  │   ├── variables
+  │   │   ├── variables.data-00000-of-00001
+  │   │   ├── variables.index
+  ```
+
+  1. 下载预训练模型，或训练模型
+  2. 根据需要转成saved_model格式
+  3. 打包成zip文件, `zip -r  efficientnet-v2-tfserving.zip 1 `
+
 ## Torch Serve模型准备
+
 例子[参考 ](./aimp-serving/aimp-serving-test/faster-rcnn-torchserve)
 * 模型结构
 ```bash
@@ -159,8 +198,8 @@ spec:
 4. 生成的*.mar放入model-store文件夹,打包命令[参考 ](./aimp-serving/aimp-serving-test/faster-rcnn-torchserve/READEME.md)
 5. 在config文件夹下新建config.propertites，[参考 ](./aimp-serving/aimp-serving-test/faster-rcnn-torchserve/READEME.md)
 6. 打包成zip文件, `zip faster-rcnn-torchserve.zip model-store config `
-## Triton 模型准备
 ## sklearn 模型准备
+
 * 模型结构
 一个文件，名字是model.joblib
 ```bash
