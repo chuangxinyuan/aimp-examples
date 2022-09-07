@@ -9,6 +9,7 @@ from onepanel.core.api.rest import ApiException
 import onepanel.core.auth
 from transformers import BertTokenizer
 import requests
+import numpy as np 
 
 # MUST import AIMP python SDK
 # import upper dir's python file

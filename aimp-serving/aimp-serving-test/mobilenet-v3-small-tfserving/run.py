@@ -26,7 +26,7 @@ infer_endpoint=aimpPredict.infer_endpoint
 #end init the aimpinferSDK
 
 # step 4 predict
-with open('./cat1.pkl','rb') as f:
+with open('./cat.pkl','rb') as f:
     img_data = pickle.load(f)
     
 #import cv2

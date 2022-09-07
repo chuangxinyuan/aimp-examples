@@ -9,10 +9,10 @@ spec:
     pytorch:
       resources:
         limits:
-          cpu: 1
+          cpu: 2
           memory: 8Gi
         requests:
           cpu: 1
-          memory: 8Gi
+          memory: 4Gi
       runtimeVersion: 0.4.0
       storageUri: "https://models.blob.core.chinacloudapi.cn/cv-models/faster-rcnn-pytorch.zip"

@@ -13,6 +13,6 @@ spec:
           memory: 8Gi
         requests:
           cpu: 1
-          memory: 8Gi
+          memory: 4Gi
       runtimeVersion: 20.10-py3
-      storageUri: "https://models.blob.core.chinacloudapi.cn/nlp-models/resnet50-onnx-triton.zip"
+      storageUri: "https://models.blob.core.chinacloudapi.cn/cv-models/resnet50-onnx-triton.zip"

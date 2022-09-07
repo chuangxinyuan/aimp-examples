@@ -9,10 +9,10 @@ spec:
     tensorflow:
       resources:
         limits:
-          cpu: 4
-          memory: 16Gi
-        requests:
           cpu: 2
           memory: 8Gi
+        requests:
+          cpu: 1
+          memory: 4Gi
       runtimeVersion: 2.2.0
       storageUri: "https://models.blob.core.chinacloudapi.cn/cv-models/efficientnet-v2-tfserving.zip"

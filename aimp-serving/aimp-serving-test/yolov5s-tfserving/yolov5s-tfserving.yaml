@@ -13,6 +13,6 @@ spec:
           memory: 8Gi
         requests:
           cpu: 1
-          memory: 8Gi
+          memory: 4Gi
       runtimeVersion: 2.2.0
       storageUri: "https://models.blob.core.chinacloudapi.cn/cv-models/yolov5s-tfserving.zip"

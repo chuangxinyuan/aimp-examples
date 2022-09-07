@@ -1,13 +1,12 @@
-
 apiVersion: "serving.kubeflow.org/v1beta1"
 kind: "InferenceService"
 metadata:
   namespace: mp
-  name: "yelp-polarity-triton"
+  name: "efficientnet-v2-small-tfserving"
  
 spec:
   predictor:
-    triton:
+    tensorflow:
       resources:
         limits:
           cpu: 2
@@ -15,5 +14,5 @@ spec:
         requests:
           cpu: 1
           memory: 4Gi
-      runtimeVersion: 20.10-py3
-      storageUri: "https://models.blob.core.chinacloudapi.cn/nlp-models/yelp-polarity-triton.zip"
+      runtimeVersion: 2.2.0
+      storageUri: "https://models.blob.core.chinacloudapi.cn/cv-models/efficient-v2-small-tfserving.zip"
