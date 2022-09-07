@@ -48,7 +48,7 @@ data = {
     "name": "input.1",
     "shape": [1,3,224,224],
     "datatype": "FP32",
-    "data": img
+    "data": img_data
    }
    ]
 }
@@ -57,7 +57,7 @@ headers = {
     'onepanel-access-token': access_token
 }
 
-r = requests.post(infer_endpoint, headers=headers, json=data)
+r = requests.post(endpoint, headers=headers, json=data)
 result = r.json()
 
 print('prediction probs:  ', result['outputs'][0]['data'])
