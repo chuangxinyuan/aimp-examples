@@ -2,14 +2,12 @@ from __future__ import print_function
 import io
 import sys
 import os
-import time
-import base64
+
 import json
-import time
 import numpy as np 
 import requests
-import pickle
-from pprint import pprint
+
+
 
 # MUST import AIMP python SDK
 # import upper dir's python file
@@ -36,14 +34,15 @@ infer_endpoint=aimpPredict.infer_endpoint
     #img_data = pickle.load(f)
     
 import cv2
-import matplotlib.pyplot as plt
 path = './cat1.jpg'
 img = cv2.imread(path)
 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+# For this model, the size of the input images is fixed to height x width = 224 x 224 pixels.
 img = cv2.resize(img,(224,224))
-plt.imshow(img)
 img = img / 255.0
-img = np.expand_dims(img,axis = 0).tolist()
+img_data = np.expand_dims(img,axis = 0).tolist()
+
+
 
 data = {
     'instances': img_data
