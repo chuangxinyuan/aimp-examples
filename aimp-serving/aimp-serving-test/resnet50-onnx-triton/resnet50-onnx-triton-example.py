@@ -68,7 +68,7 @@ print('---Prediction RESULTS---')
 # original predict URL
 #r = requests.post(endpoint, headers=headers, data=json.dumps(data), verify=False)
 # skip cert check
-r = requests.post(infer_endpoint, headers=headers, json=data)
+r = requests.post(infer_endpoint, headers=headers, json=data, verify=False)
 result = r.json()
 
 print('prediction probs:  ', result['outputs'][0]['data'])
