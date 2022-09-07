@@ -9,6 +9,7 @@ import requests
 from pprint import pprint
 from transformers import BertTokenizer
 import requests
+import pickle 
 
 # MUST import AIMP python SDK
 # import upper dir's python file

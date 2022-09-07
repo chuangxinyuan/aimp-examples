@@ -2,20 +2,24 @@
 * 上海仪电人工智能中台v1.0的AI模型推理组件是基于[kfserving 0.6.0版本](https://github.com/chuangxinyuan/aimp-kfserving/tree/release-0.6)。
 ## AIMP公开模型列表
 
-|名称|描述| 服务地址  |预测器| 模型格式| 模型文件下载地址| 版本| 文档 |
+|名称|描述| 服务地址  |推理框架| 模型格式| 协议版本 | 运行时版本 | 文档 |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-|efficientnet-v2-simple-tfserving|-|-| [Triton Inference Server](https://github.com/triton-inference-server/server) | [TensorFlow,TorchScript,ONNX,TensorRT](https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/model_repository.html)| v2 |[Compatibility Matrix](https://docs.nvidia.com/deeplearning/frameworks/support-matrix/index.html)| [README](./aimp-serving/aimp-serving-test/efficientnet-v2-simple-tfserving/READEME.md) |
-|efficientnet-v2-tfserving|-|-| [TFServing](https://www.tensorflow.org/tfx/guide/serving) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) | v1 ||[README](./aimp-serving/aimp-serving-test/efficientnet-v2-tfserving/READEME.md)   |
-|faster-rcnn-torchserve|-|-| [TorchServe](https://pytorch.org/serve/server.html) | [Eager Model/TorchScript](https://pytorch.org/docs/master/generated/torch.save.html) | v1 | 0.3.0 |[README](./aimp-serving/aimp-serving-test/faster-rcnn-torchserve/READEME.md)  |
+|efficientnet-v2-simple-tfserving|-|-| [TFServing](https://www.tensorflow.org/tfx/guide/serving) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) | v1 |2.2.0| [README](./aimp-serving/aimp-serving-test/efficientnet-v2-simple-tfserving/READEME.md) |
+|efficientnet-v2-tfserving|-|-| [TFServing](https://www.tensorflow.org/tfx/guide/serving) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) | v1 |2.2.0|[README](./aimp-serving/aimp-serving-test/efficientnet-v2-tfserving/READEME.md)   |
+|faster-rcnn-torchserve|-|-| [TorchServe](https://pytorch.org/serve/server.html) | [Eager Model/TorchScript](https://pytorch.org/docs/master/generated/torch.save.html) | v1 | 0.4.0 |[README](./aimp-serving/aimp-serving-test/faster-rcnn-torchserve/READEME.md)  |
 |iris-sklearn|-|-| [SKLearn KFServer](https://github.com/kubeflow/kfserving/tree/master/python/sklearnserver) | [Pickled Model](https://scikit-learn.org/stable/modules/model_persistence.html) 文件后缀为joblib| v1 | 0.20.3 | [README](./aimp-serving/aimp-serving-test/iris-sklearn/READEME.md) |
-|yelp-polarity-triton|-|-| [SKLearn KFServer](https://github.com/kubeflow/kfserving/tree/master/python/sklearnserver) | [Pickled Model](https://scikit-learn.org/stable/modules/model_persistence.html) 文件后缀为joblib| v1 | 0.20.3 | [README](./aimp-serving/aimp-serving-test/yelp-polarity-triton/READEME.md) |
-|yolov5s-tfserving|-|-| [SKLearn KFServer](https://github.com/kubeflow/kfserving/tree/master/python/sklearnserver) | [Pickled Model](https://scikit-learn.org/stable/modules/model_persistence.html) 文件后缀为joblib| v1 | 0.20.3 | [README](./aimp-serving/aimp-serving-test/yolov5s-tfserving/READEME.md) |
-|yolox-onnx-triton|-|-| [SKLearn KFServer](https://github.com/kubeflow/kfserving/tree/master/python/sklearnserver) | [Pickled Model](https://scikit-learn.org/stable/modules/model_persistence.html) 文件后缀为joblib| v1 | 0.20.3 | [README](./aimp-serving/aimp-serving-test/yolov5s-tfserving/READEME.md)   |
+|yelp-polarity-triton|-|-| [Triton Inference Server](https://github.com/triton-inference-server/server) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) | v2 | 20.10-py3 | [README](./aimp-serving/aimp-serving-test/yelp-polarity-triton/READEME.md) |
+|yolov5s-tfserving|-|-| [TFServing](https://www.tensorflow.org/tfx/guide/serving) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) | v1 | 2.2.0 | [README](./aimp-serving/aimp-serving-test/yolov5s-tfserving/READEME.md) |
+|yolox-onnx-triton|-|-| [ONNXRuntime](https://github.com/microsoft/onnxruntime) | [Exported ONNX Model](https://github.com/onnx/tutorials#converting-to-onnx-format) | v2 | 20.10-py3 | [README](./aimp-serving/aimp-serving-test/yolov5s-tfserving/READEME.md)   |
+|resnet50-onnx- triton|-|-| [Triton Inference Server](https://github.com/triton-inference-server/server) | [Exported ONNX Model](https://github.com/onnx/tutorials#converting-to-onnx-format) | v2 | 20.10-py3 | [README](./aimp-serving/aimp-serving-test/resnet50-onnx-triton/READEME.md) |
+|mobilenet-v3-small-tfserving|-|-| [TFServing](https://www.tensorflow.org/tfx/guide/serving) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) | v1 | 2.2.0 | [README](./aimp-serving/aimp-serving-test/mobilenet-v3-small-tfserving/READEME.md) |
+|text2vec-base-chinese-triton|-|-| [Triton Inference Server](https://github.com/triton-inference-server/server) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) | v2 | 20.10-py3 | [README](./aimp-serving/aimp-serving-test/text2vec-base-chinese-triton/READEME.md) |
 
 原生的功能和支持的AI模型类型列表和相应的例子请参见：
 [model servers](./docs/samples/README.md)
 
 ## 公开模型使用方法
+
 1. 登陆中台，运行aimp-serving-examples 工作流，选择sample-name 下面的模型，然后执行，可以从流日志中查看相应的执行效果。查看aimp-serving/aimp-serving-test 目录下的具体模型目录中的run.py，了解程序运行的细节。
 2. 进入aimp-serving/aimp-serving-test 目录下的具体的模型目录，运行<模型名字-example.py>程序，查看执行效果。
    
@@ -168,7 +172,7 @@ spec:
 3. 打包： ` zip iris-sklearn.zip model.joblib`
 ## 上传模型文件
 上传到模型仓库对应的目录下（cv-models或nlp-models等），并生成可以下载的链接，在模型定义yaml的 uri字段中使用。
- 
+
 # 模型仓库
 ## 模型仓库目录结构
 * AIMP模型仓库位于azure cn 的对象存储中，目录结构如下

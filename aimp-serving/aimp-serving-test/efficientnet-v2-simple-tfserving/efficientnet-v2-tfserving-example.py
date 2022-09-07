@@ -33,15 +33,15 @@ infer_endpoint=aimpPredict.infer_endpoint
 
 # step 4 predict
 #with open('./img.pkl','rb') as f:
-    img_data = pickle.load(f)
+    # img_data = pickle.load(f)
 
 import cv2
-import matplotlib.pyplot as plt
+
 path = './cat1.jpg'
 img = cv2.imread(path)
 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 img = cv2.resize(img,(160,128))
-plt.imshow(img)
+
 img = img / 255.0
 img = np.expand_dims(img,axis = 0).tolist()
 

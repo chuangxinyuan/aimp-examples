@@ -29,7 +29,14 @@ arguments:
         - name: yolox-onnx-triton
           value: yolox-onnx-triton
         - name: iris-sklearn
-          value: iris-sklearn          
+          value: iris-sklearn
+        - name: mobilenet-v3-small-tfserving
+          value: mobilenet-v3-small-tfserving
+        - name: resnet50-onnx-triton
+          value: resnet50-onnx-triton   
+        - name: text2vec-base-chinese-triton
+          value: text2vec-base-chinese-triton   
+          
 entrypoint: main
 templates:
   - name: main
@@ -46,7 +53,7 @@ templates:
       command:
         - sh
         - -c
-      args: [pip3 install requests; pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple transformers; pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple numpy; pip3 install -i  https://pypi.tuna.tsinghua.edu.cn/simple onepanel-sdk==1.0.1; python3 run.py  ]
+      args: [pip3 install requests;  pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple transformers; pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple numpy; pip3 install -i  https://pypi.tuna.tsinghua.edu.cn/simple onepanel-sdk==1.0.1; python3 run.py  ]
     inputs:
       artifacts:
         - git:

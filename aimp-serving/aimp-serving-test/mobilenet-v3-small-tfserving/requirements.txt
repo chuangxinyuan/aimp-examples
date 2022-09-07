@@ -1,1 +1,0 @@
-For this model, the size of the input images is fixed to height x width = 224 x 224 pixels.

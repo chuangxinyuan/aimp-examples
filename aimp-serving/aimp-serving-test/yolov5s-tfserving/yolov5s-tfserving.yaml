@@ -1,0 +1,18 @@
+apiVersion: "serving.kubeflow.org/v1beta1"
+kind: "InferenceService"
+metadata:
+  namespace: mp
+  name: "yolov5s-tfserving"
+  
+spec:
+  predictor:
+    tensorflow:
+      resources:
+        limits:
+          cpu: 1
+          memory: 8Gi
+        requests:
+          cpu: 1
+          memory: 8Gi
+      runtimeVersion: 2.2.0
+      storageUri: "https://models.blob.core.chinacloudapi.cn/cv-models/yolov5s-tfserving.zip"

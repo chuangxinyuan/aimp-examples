@@ -33,7 +33,7 @@ infer_endpoint=aimpPredict.infer_endpoint
 
 # step 4 predict
 import cv2
-path = './cat1.jpg'
+path = './cat.jpg'
 img = cv2.imread(path)
 img = cv2.resize(img,(224,224))
 img = img / 255.0
