@@ -1,4 +1,6 @@
 # 介绍
+The Faster R-CNN model is based on the Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks paper.
+
 # 模型准备方法
 * Torch Serve模型准备
 安装工具：
@@ -37,6 +39,8 @@ model_snapshot={"name":"startup.cfg","modelCount":1,"models":{"faster-rcnn-torch
 ```
 * 打包成zip文件, `zip faster-rcnn-torchserve.zip model-store config `
 * 模型的结构和部署，请参考标准步骤
+
 # 参考
-[官方文档，torch serve](https://github.com/chuangxinyuan/aimp-kfserving/tree/release-0.6/docs/samples/v1beta1/torchserve)
-# 使用方法
+
+https://pytorch.org/vision/stable/models/faster_rcnn.html
+
