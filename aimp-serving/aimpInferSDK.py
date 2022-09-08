@@ -21,7 +21,7 @@ class aimpInfer:
     username=''
     token=''
     aimp_host=''
-    infer_host=''
+    infer_host='https://infer.dev.aimpcloud.cn/'
     #aimp_host='http://onepanel.niuhongxing.cn/api'
     #infer_host='https://portal.aimpcloud.cn'
 

@@ -10,6 +10,7 @@ import onepanel.core.auth
 from transformers import BertTokenizer
 import requests
 import numpy as np 
+from pprint import pprint
 
 # MUST import AIMP python SDK
 # import upper dir's python file
@@ -24,7 +25,8 @@ aimpPredict.namespace = 'mp'
 aimpPredict.model_name = 'yelp-polarity-triton'
 aimpPredict.getAccess()
 access_token=aimpPredict.api_access_token
-endpoint=aimpPredict.infer_endpoint
+infer_host_FQDN=aimpPredict.infer_host_FQDN
+infer_endpoint=aimpPredict.infer_endpoint
 #end init the aimpinferSDK
 
 tokenizer = BertTokenizer.from_pretrained("ydshieh/bert-base-uncased-yelp-polarity")
@@ -47,12 +49,21 @@ data = {
 }
 
 headers = {
-    'onepanel-access-token': access_token
+    'onepanel-access-token': access_token,
+    'Content-Type': 'application/json',
+    'Host': infer_host_FQDN,
 }
-
-r = requests.post(endpoint,headers=headers, json=data)
-
+print('---api_predict_endpoint and headers---')
+print (infer_endpoint)
+pprint(headers)
+print('\n')
+print('---Prediction RESULTS---')
+# original predict URL
+#r = requests.post(endpoint, headers=headers, data=data, verify=False)
+# skip cert check
+r = requests.post(infer_endpoint, headers=headers, data=data, verify=False)
 result = r.json()
+pprint(result)
 
 print('prediction probs:  ', result['outputs'][0]['data'])
 

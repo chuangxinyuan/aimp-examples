@@ -20,8 +20,7 @@ class aimpInfer:
     # MUST specify according to your situation, host请注意URL的后缀api和infer_host后面的/
     namespace = ''
     model_name = ''
-    #infer_host='https://infer.aimpcloud.cn/'
-    infer_host=''
+    infer_host='https://infer.dev.aimpcloud.cn/'
 
     #used by inference
     api_access_token=''

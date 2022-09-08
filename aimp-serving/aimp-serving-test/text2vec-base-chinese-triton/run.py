@@ -9,6 +9,7 @@ from onepanel.core.api.rest import ApiException
 import onepanel.core.auth
 from transformers import BertTokenizer
 import requests
+from pprint import pprint
 
 # MUST import AIMP python SDK
 # import upper dir's python file
@@ -23,7 +24,8 @@ aimpPredict.namespace = 'mp'
 aimpPredict.model_name = 'text2vec-base-chinese-triton'
 aimpPredict.getAccess()
 access_token=aimpPredict.api_access_token
-endpoint=aimpPredict.infer_endpoint
+infer_host_FQDN=aimpPredict.infer_host_FQDN
+infer_endpoint=aimpPredict.infer_endpoint
 #end init the aimpinferSDK
 
 tokenizer = BertTokenizer.from_pretrained("shibing624/text2vec-base-chinese")
@@ -48,11 +50,20 @@ data = {
 }
 
 headers = {
-    'onepanel-access-token': access_token
+    'onepanel-access-token': access_token,
+    'Content-Type': 'application/json',
+    'Host': infer_host_FQDN,
 }
-
-r = requests.post(endpoint,headers=headers, json=data)
-
+print('---api_predict_endpoint and headers---')
+print (infer_endpoint)
+pprint(headers)
+print('\n')
+print('---Prediction RESULTS---')
+# original predict URL
+#r = requests.post(endpoint, headers=headers, data=data, verify=False)
+# skip cert check
+r = requests.post(infer_endpoint, headers=headers, data=data, verify=False)
 result = r.json()
+pprint(result)
 
 print('sentence embeddings:  ', result['outputs'][0]['data'])

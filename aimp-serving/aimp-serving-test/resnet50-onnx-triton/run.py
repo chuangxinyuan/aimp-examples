@@ -24,7 +24,8 @@ aimpPredict.namespace = 'mp'
 aimpPredict.model_name = 'resnet50-onnx-triton'
 aimpPredict.getAccess()
 access_token=aimpPredict.api_access_token
-endpoint=aimpPredict.infer_endpoint
+infer_host_FQDN=aimpPredict.infer_host_FQDN
+infer_endpoint=aimpPredict.infer_endpoint
 #end init the aimpinferSDK
 
 # step 4 predict
@@ -54,11 +55,21 @@ data = {
 }
 
 headers = {
-    'onepanel-access-token': access_token
+    'onepanel-access-token': access_token,
+    'Content-Type': 'application/json',
+    'Host': infer_host_FQDN,
 }
-
-r = requests.post(endpoint, headers=headers, json=data)
+print('---api_predict_endpoint and headers---')
+print (infer_endpoint)
+pprint(headers)
+print('\n')
+print('---Prediction RESULTS---')
+# original predict URL
+#r = requests.post(endpoint, headers=headers, data=data, verify=False)
+# skip cert check
+r = requests.post(infer_endpoint, headers=headers, data=data, verify=False)
 result = r.json()
+pprint(result)
 
 print('prediction probs:  ', result['outputs'][0]['data'])
 

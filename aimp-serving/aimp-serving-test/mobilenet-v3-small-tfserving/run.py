@@ -22,6 +22,7 @@ aimpPredict.namespace = 'mp'
 aimpPredict.model_name = 'mobilenet-v3-small-tfserving'
 aimpPredict.getAccess()
 access_token=aimpPredict.api_access_token
+infer_host_FQDN=aimpPredict.infer_host_FQDN
 infer_endpoint=aimpPredict.infer_endpoint
 #end init the aimpinferSDK
 
@@ -44,9 +45,18 @@ data = {
 }
 
 headers = {
-    'onepanel-access-token': access_token
+    'onepanel-access-token': access_token,
+    'Content-Type': 'application/json',
+    'Host': infer_host_FQDN,
 }
-
-r = requests.post(infer_endpoint, headers=headers, data=json.dumps(data), verify=False)
+print('---api_predict_endpoint and headers---')
+print (infer_endpoint)
+pprint(headers)
+print('\n')
+print('---Prediction RESULTS---')
+# original predict URL
+#r = requests.post(endpoint, headers=headers, data=data, verify=False)
+# skip cert check
+r = requests.post(infer_endpoint, headers=headers, data=data, verify=False)
 result = r.json()
-print(result)
+pprint(result)
