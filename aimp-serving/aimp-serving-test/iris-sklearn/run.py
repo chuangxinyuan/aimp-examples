@@ -25,15 +25,17 @@ import aimpInferWorkFlowSDK
 aimpPredict=aimpInferWorkFlowSDK.aimpInfer()
 aimpPredict.namespace = 'mp'
 aimpPredict.model_name = 'iris'
+aimpPredict.infer_host='https://infer.dev.aimpcloud.cn/'
 aimpPredict.getAccess()
 access_token=aimpPredict.api_access_token
-endpoint=aimpPredict.infer_endpoint
+infer_host_FQDN=aimpPredict.infer_host_FQDN
+infer_endpoint=aimpPredict.infer_endpoint
 #end init the aimpinferSDK
-
 
 headers = {
     'onepanel-access-token': access_token,
     'Content-Type': 'application/json',
+    'Host': infer_host_FQDN,
 }
 f = open('./iris-input.json', 'rb') #open binary file in read mode
 data = f.read()
@@ -42,7 +44,7 @@ print('---Prediction RESULTS---')
 # original predict URL
 #r = requests.post(endpoint, headers=headers, data=data, verify=False)
 # skip cert check
-r = requests.post(endpoint, headers=headers, data=data, verify=False)
+r = requests.post(infer_endpoint, headers=headers, data=data, verify=False)
 result = r.json()
 pprint(result)
 
