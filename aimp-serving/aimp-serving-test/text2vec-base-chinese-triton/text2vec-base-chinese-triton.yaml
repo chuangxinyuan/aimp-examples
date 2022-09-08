@@ -1,0 +1,18 @@
+apiVersion: "serving.kubeflow.org/v1beta1"
+kind: "InferenceService"
+metadata:
+  namespace: mp
+  name: "text2vec-base-chinese-triton"
+ 
+spec:
+  predictor:
+    triton:
+      resources:
+        limits:
+          cpu: 1
+          memory: 8Gi
+        requests:
+          cpu: 1
+          memory: 8Gi
+      runtimeVersion: 20.10-py3
+      storageUri: "https://models.blob.core.chinacloudapi.cn/nlp-models/text2vec-base-chinese-triton.zip"
