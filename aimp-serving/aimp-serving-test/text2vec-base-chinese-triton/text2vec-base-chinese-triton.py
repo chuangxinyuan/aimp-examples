@@ -9,7 +9,7 @@ import time
 import requests
 from pprint import pprint
 from transformers import BertTokenizer
-
+import numpy as np 
 # MUST import AIMP python SDK
 # import upper dir's python file
 sys.path.append("../..") 
@@ -38,13 +38,13 @@ data = {
    "inputs":[
    {
     "name": "input_ids",
-    "shape": [1,13],
+    "shape": np.array(inputs['input_ids']).shape,
     "datatype": "INT32",
     "data": inputs['input_ids']
    },
     {
     "name": "attention_mask",
-    "shape": [1,13],
+    "shape": np.array(inputs['attention_mask']).shape,
     "datatype": "INT32",
     "data": inputs['attention_mask']
    }, 

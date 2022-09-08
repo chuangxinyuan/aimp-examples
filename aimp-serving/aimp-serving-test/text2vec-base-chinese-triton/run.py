@@ -16,7 +16,7 @@ import sys
 sys.path.append("../..") 
 sys.path.append("..") 
 import aimpInferWorkFlowSDK
-
+import numpy as np 
 #start init the aimpinferWorkFlowSDK
 aimpPredict=aimpInferWorkFlowSDK.aimpInfer()
 aimpPredict.namespace = 'mp'
@@ -34,13 +34,13 @@ data = {
    "inputs":[
    {
     "name": "input_ids",
-    "shape": [1,13],
+    "shape": np.array(inputs['input_ids']).shape,
     "datatype": "INT32",
     "data": inputs['input_ids']
    },
     {
     "name": "attention_mask",
-    "shape": [1,13],
+    "shape": np.array(inputs['attention_mask']).shape,
     "datatype": "INT32",
     "data": inputs['attention_mask']
    }, 
