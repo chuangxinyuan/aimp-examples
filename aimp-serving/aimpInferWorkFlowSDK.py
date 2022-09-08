@@ -59,12 +59,14 @@ class aimpInfer:
                api_response = api_instance.get_inference_service(self.namespace, self.model_name)
                ready = api_response.ready
                endpoint = api_response.predict_url
+               print('---api_response.predict_url---')
+               pprint(endpoint)
+
                # ? is non greedy, get FQDN of predict URL
                self.infer_host_FQDN=re.findall(r"http.?//(.*?)/",endpoint)[0]
                print (self.infer_host_FQDN)
                self.infer_endpoint=re.sub(r"http.?//.*?/",self.infer_host, endpoint)
-               print('---infer.url---', self.infer_endpoint)
-               print('\n')
+
 
         except ApiException as e:
             print("Exception when calling InferenceServiceApi->get_inference_service_status: %s\n" % e)
