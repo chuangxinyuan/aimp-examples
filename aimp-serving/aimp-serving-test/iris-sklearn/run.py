@@ -25,7 +25,7 @@ import aimpInferWorkFlowSDK
 aimpPredict=aimpInferWorkFlowSDK.aimpInfer()
 aimpPredict.namespace = 'mp'
 aimpPredict.model_name = 'iris'
-aimpPredict.infer_host='https://infer.dev.aimpcloud.cn/'
+aimpPredict.infer_host='https://infer.aimpcloud.cn/'
 aimpPredict.getAccess()
 access_token=aimpPredict.api_access_token
 infer_host_FQDN=aimpPredict.infer_host_FQDN
