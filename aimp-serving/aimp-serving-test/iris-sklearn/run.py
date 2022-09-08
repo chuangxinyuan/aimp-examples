@@ -39,7 +39,7 @@ headers = {
 }
 f = open('./iris-input.json', 'rb') #open binary file in read mode
 data = f.read()
-
+print('---access_token---', access_token)
 print('---Prediction RESULTS---')
 # original predict URL
 #r = requests.post(endpoint, headers=headers, data=data, verify=False)
