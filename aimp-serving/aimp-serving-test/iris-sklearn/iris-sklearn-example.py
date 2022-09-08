@@ -23,7 +23,7 @@ aimpPredict.model_name = 'iris'
 aimpPredict.username='admin'
 aimpPredict.token='5aed14f5bffc9f86fd0fb2745519f2ff'
 aimpPredict.aimp_host='http://onepanel.niuhongxing.cn/api'
-aimpPredict.infer_host='https://infer.dev.aimpcloud.cn/'
+aimpPredict.infer_host='https://infer.aimpcloud.cn/'
 aimpPredict.getAccess()
 access_token=aimpPredict.api_access_token
 infer_host_FQDN=aimpPredict.infer_host_FQDN
