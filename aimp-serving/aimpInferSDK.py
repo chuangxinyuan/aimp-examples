@@ -16,12 +16,14 @@ from pprint import pprint
 
 class aimpInfer:
     # MUST specify according to your situation, host请注意URL的后缀api和infer_host后面的/
-    namespace = 'mp'
-    model_name = 'faster-rcnn-torchserve'
-    username='admin'
-    token='5aed14f5bffc9f86fd0fb2745519f2ff'
-    aimp_host='http://onepanel.niuhongxing.cn/api'
-    infer_host='https://infer.dev.aimpcloud.cn/'
+    namespace = ''
+    model_name = ''
+    username=''
+    token=''
+    aimp_host=''
+    infer_host=''
+    #aimp_host='http://onepanel.niuhongxing.cn/api'
+    #infer_host='https://portal.aimpcloud.cn'
 
     #used by inference
     infer_host_FQDN=''

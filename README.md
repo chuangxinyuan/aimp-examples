@@ -69,8 +69,9 @@ http://yelp-polarity-triton.mp.svc.cluster.local/v2/models/yelp-polarity-triton/
     model_name = '根据实际情况填写'
     infer_host='https://根据实际情况填写/'
 
-    # 输出参数2个
+    # 输出参数3个
     # used by inference
+    infer_host_FQDN=''
     api_access_token=''
     infer_endpoint=''
 ```

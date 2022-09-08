@@ -17,13 +17,15 @@ from pprint import pprint
 
 class aimpInfer:
     # MUST specify according to your situation, host请注意URL的后缀api和infer_host后面的/
-    namespace = 'mp'
-    model_name = 'faster-rcnn-torchserve'
-    infer_host='https://infer.dev.aimpcloud.cn/'
+    namespace = ''
+    model_name = ''
+    #infer_host='https://infer.aimpcloud.cn/'
+    infer_host=''
 
     #used by inference
     api_access_token=''
     infer_endpoint=''
+    infer_host_FQDN=''
 
     def __init__(self):
         pass
@@ -56,9 +58,13 @@ class aimpInfer:
                api_response = api_instance.get_inference_service(self.namespace, self.model_name)
                ready = api_response.ready
                endpoint = api_response.predict_url
-               print('---api_response.predict_url---', endpoint)
-               self.infer_endpoint=endpoint
+               # ? is non greedy, get FQDN of predict URL
+               self.infer_host_FQDN=re.findall(r"http.?//(.*?)/",endpoint)[0]
+               print (self.infer_host_FQDN)
+               self.infer_endpoint=re.sub(r"http.?//.*?/",self.infer_host, endpoint)
+               print('---infer.url---', self.infer_endpoint)
                print('\n')
+
         except ApiException as e:
             print("Exception when calling InferenceServiceApi->get_inference_service_status: %s\n" % e)
 
