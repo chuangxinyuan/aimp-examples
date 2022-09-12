@@ -34,6 +34,7 @@ class aimpInfer:
         pass
 
     def getAccess(self):
+        self.indication()
         # step 1 获取用户访问onepanel的 api key 和access_token
         access_token = onepanel.core.auth.get_access_token(username=self.username, token=self.token, host=self.aimp_host)
         # Configure API key authorization: Bearer
@@ -83,3 +84,17 @@ class aimpInfer:
                 print('\n')
         except ApiException as e:
             print("Exception when calling InferenceServiceApi->get_inference_service_status: %s\n" % e)
+    def indication(self):
+        print ('''
+        ***************************************************************
+                                  _____  __  __  _____  
+                           /\    |_   _||  \/  ||  __ \ 
+                          /  \     | |  | \  / || |__) | 
+                         / /\ \    | |  | |\/| ||  ___/ 
+                        / ____ \  _| |_ | |  | || |     
+                       /_/    \_\|_____||_|  |_||_|    
+        使用SDK时，请更改 aimpPredict.model_name, aimpPredict.username, 
+        aimpPredict.token,aimpPredict.aimp_host,aimpPredict.infer_host 为实际的值 
+        ***************************************************************
+        ''')
+

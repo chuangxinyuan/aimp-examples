@@ -18,10 +18,13 @@
 原生的功能和支持的AI模型类型列表和相应的例子请参见：
 [model servers](./docs/samples/README.md)
 
-## 公开模型使用方法
+## 公开模型测试方法
 
 1. 登陆中台，运行aimp-serving-examples 工作流，选择sample-name 下面的模型，然后执行，可以从流日志中查看相应的执行效果。查看aimp-serving/aimp-serving-test 目录下的具体模型目录中的run.py，了解程序运行的细节。
+   1. 注意：请设置中台的环境变量INFER_HOST 为实际的值
+   2. AIMP 0.91版本请设置中台的环境变量API_ACCESS_TOKEN为在“AIMP外部使用SDK方式”时获取的API_ACCESS_TOKEN的值
 2. 进入aimp-serving/aimp-serving-test 目录下的具体的模型目录，运行<模型名字-example.py>程序，查看执行效果。
+   1. 注意：请更改 impPredict.model_name, aimpPredict.username, aimpPredict.token,aimpPredict.aimp_host,aimpPredict.infer_host 为实际的值 
    
 # 模型推理服务使用方式
 * 中台推理服务的地址是 https://infer.dev.aimpcloud.cn (实际的地址根据部署的情况不同会有差异，实际的地址请向管理员索取）。
@@ -57,7 +60,14 @@ http://yelp-polarity-triton.mp.svc.cluster.local/v2/models/yelp-polarity-triton/
 
 ## 2. python SDK 方式
 * [参考：SDK文档](https://github.com/onepanelio/python-sdk)
-* 必须是python 3 版本，python 2.6不支持，安装SDK `pip install onepanel-sdk`
+* 必须是python 3.7 版本，python 2.6不支持，如下的包版本供参考
+   ``` bash
+   # 设置python 3.7的基本运行环境
+   pip install onepanel-sdk
+   pip install requests=2.25.1
+   pip install requests-oauthlib==1.3.1
+   pip install numpy==1.21.6
+   ```
 ### 在AIMP工作流内部使用SDK
 * 工作流内部使用时，可以从上下文中获取用户名和对应的token，并且也不用显式的指定ONEPANEL_API_URL，可以从环境变量中获得。
 * SDK 代码[aimpInferWorkFlowSDK.py](./aimp-serving/aimpInferWorkFlowSDK.py)
@@ -95,9 +105,7 @@ http://yelp-polarity-triton.mp.svc.cluster.local/v2/models/yelp-polarity-triton/
     api_access_token=''
     infer_endpoint=''
 ```
-
 # 模型部署和调试
-
 ## 使用自定义的predictor镜像
 
 以sklearn的镜像为例, 使用自定义的sklearn的predictor镜像:
