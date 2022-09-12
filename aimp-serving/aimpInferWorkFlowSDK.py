@@ -36,6 +36,12 @@ class aimpInfer:
         # If inside of Onepanel, get mounted service account token to use as API Key
         access_token = onepanel.core.auth.get_access_token()
         self.api_access_token = access_token
+        
+        #从AIMP的环境变量中读取API_ACCESS_TOKEN 和infer host，这个优先级最高，在名字空间范围内有效
+        if (not os.getenv("API_ACCESS_TOKEN")):
+            self.api_access_token = os.getenv("API_ACCESS_TOKEN")
+        if (not os.getenv("INFER_HOST")):
+            self.infer_host = os.getenv("INFER_HOST")
 
         print('---ONEPANEL_API_URL----', os.getenv('ONEPANEL_API_URL'))
         # Configure API key authorization: Bearer
