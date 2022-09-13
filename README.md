@@ -1,5 +1,5 @@
-# 上海仪电人工智能中台说明
-* 上海仪电人工智能中台v1.0的AI模型推理组件是基于[kfserving 0.6.0版本](https://github.com/chuangxinyuan/aimp-kfserving/tree/release-0.6)。
+# AIMP模型库
+* 上海仪电人工智能中台v1.0模型库。
 ## AIMP公开模型列表
 
 |模型|描述| 服务 |推理框架| 模型格式| 协议版本 | 运行时版本 | 文档 |
