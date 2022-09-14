@@ -4,7 +4,7 @@
 
 |模型|描述| 服务 |推理框架| 模型格式| 协议版本 | 运行时版本 | 文档 |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-|efficientnet_v2_s|目标检测|efficientnet-v2-small-tfserving| [TFServing](https://www.tensorflow.org/tfx/guide/serving) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) | v1 |2.2.0| [README](./aimp-serving/aimp-serving-test/efficientnet-v2-simple-tfserving/READEME.md) |
+|efficientnet_v2_s|目标检测|efficientnet-v2-small-tfserving| [TFServing](https://www.tensorflow.org/tfx/guide/serving) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) | v1 |2.2.0| [README](./aimp-serving/aimp-serving-test/efficientnet-v2-small-tfserving/READEME.md) |
 |efficientnet_v2_l|目标检测|efficientnet-v2-tfserving| [TFServing](https://www.tensorflow.org/tfx/guide/serving) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) | v1 |2.2.0|[README](./aimp-serving/aimp-serving-test/efficientnet-v2-tfserving/READEME.md)   |
 |fasterrcnn_resnet50_fpn_coco|目标检测|faster-rcnn-torchserve| [TorchServe](https://pytorch.org/serve/server.html) | [Eager Model/TorchScript](https://pytorch.org/docs/master/generated/torch.save.html) | v1 | 0.4.0 |[README](./aimp-serving/aimp-serving-test/faster-rcnn-torchserve/READEME.md)  |
 |iris-sklearn|图像分类|iris-sklearn| [SKLearn KFServer](https://github.com/kubeflow/kfserving/tree/master/python/sklearnserver) | [Pickled Model](https://scikit-learn.org/stable/modules/model_persistence.html) 文件后缀为joblib| v1 | 0.20.3 | [README](./aimp-serving/aimp-serving-test/iris-sklearn/READEME.md) |
