@@ -16,7 +16,7 @@
 |text2vec-base-chinese|中文句向量|text2vec-base-chinese-triton| [Triton Inference Server](https://github.com/triton-inference-server/server) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) | v2 | 20.10-py3 | [README](./aimp-serving/aimp-serving-test/text2vec-base-chinese-triton/READEME.md) |
 
 原生的功能和支持的AI模型类型列表和相应的例子请参见：
-[model servers](./docs/samples/README.md)
+[model servers](https://github.com/chuangxinyuan/aimp-kfserving/tree/master/docs/samples)
 
 ## 公开模型测试方法
 
