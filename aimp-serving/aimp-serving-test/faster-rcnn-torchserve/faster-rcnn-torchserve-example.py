@@ -62,7 +62,7 @@ r = requests.post(infer_endpoint, headers=headers, data=json.dumps(data), verify
 result = r.json()
 print(result)
 
-pic_result = out['predictions'][0] #the result of one picture
+pic_result = result['predictions'][0] #the result of one picture
 
 ##screen result
 list1 = []
@@ -82,8 +82,6 @@ for ret in list1:
         
             img = cv2.rectangle(img, (x1, y1), (x2, y2), (255, 255, 0), 6)
             img = cv2.putText(img,k,(x1-5,y1-10),cv2.FONT_HERSHEY_COMPLEX,4,(0,0,0),4)
-
-plt.imshow(img)
  
 
 
