@@ -9,6 +9,7 @@ import time
 import numpy as np 
 import requests
 from pprint import pprint
+import  cv2
 
 # MUST import AIMP python SDK
 # import upper dir's python file
