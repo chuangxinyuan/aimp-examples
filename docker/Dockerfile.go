@@ -30,3 +30,10 @@ RUN pip3 install requests && \
     # MUST install this version to use cv2
     pip3 install opencv-contrib-python==4.5.5.62
 
+RUN conda config --add channels conda-forge && \
+    conda update --all --yes && \
+    conda create -c conda-forge -n go1.15 go=1.15 -y
+
+RUN source activate go1.15 && \
+    go env -w GO111MODULE=on && \
+    go env -w GOPROXY=https://goproxy.cn,direct
