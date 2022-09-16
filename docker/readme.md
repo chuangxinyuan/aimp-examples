@@ -1,5 +1,6 @@
 # 工作正常版本：
 **cxyacr.azurecr.cn/shaiic/miniconda3.py39.opencv:v1.1**
+
 **cxyacr.azurecr.cn/shaiic/miniconda3.py39.opencv.go:v1.2**
 # 镜像cxyacr.azurecr.cn/shaiic/miniconda3.py39.opencv:v1.1的规格 (1.2G):
 1. conda 4.12.0
