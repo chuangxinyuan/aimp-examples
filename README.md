@@ -23,7 +23,7 @@
 1. 登陆中台，运行aimp-serving-examples 工作流，选择sample-name 下面的模型，然后执行，可以从流日志中查看相应的执行效果。查看aimp-serving/aimp-serving-test 目录下的具体模型目录中的run.py，了解程序运行的细节。
    1. 注意：请设置中台的环境变量INFER_HOST 为实际的值
    2. AIMP 0.91版本请设置中台的环境变量API_ACCESS_TOKEN为在“AIMP外部使用SDK方式”时获取的API_ACCESS_TOKEN的值
-2. 进入aimp-serving/aimp-serving-test 目录下的具体的模型目录，运行<模型名字-example.py>程序，查看执行效果。
+2. 进入aimp-serving/aimp-serving-test 目录, 参考README.txt 进行测试。
    1. 注意：请更改 impPredict.model_name, aimpPredict.username, aimpPredict.token,aimpPredict.aimp_host,aimpPredict.infer_host 为实际的值 
    
 # 模型推理服务使用方式
