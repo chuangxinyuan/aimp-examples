@@ -7,7 +7,7 @@
 ``` bash
 docker run -v `pwd`:/mnt -it cxyacr.azurecr.cn/shaiic/miniconda3.py39.opencv:v1.1  bash
 cd /mnt/aimp-serving-test/efficientnet-v2-tfserving
-python yolox-onnx-triton-example.py
+python efficientnet-v2-tfserving-example.py
 
 # real examples as the following:
 root@dev-AIMP91-0:~/aimp-examples/aimp-serving# docker run -v `pwd`:/mnt -it cxyacr.azurecr.cn/shaiic/miniconda3.py39.opencv:v1.1  bash
