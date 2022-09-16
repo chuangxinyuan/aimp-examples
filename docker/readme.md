@@ -1,6 +1,23 @@
 # 工作正常版本：
 **cxyacr.azurecr.cn/shaiic/miniconda3.py39.opencv:v1.1**
-# 容器的规格:
+**cxyacr.azurecr.cn/shaiic/miniconda3.py39.opencv.go:v1.2**
+# 镜像cxyacr.azurecr.cn/shaiic/miniconda3.py39.opencv:v1.1的规格 (1.2G):
+1. conda 4.12.0
+2. py3.9
+4. opencv-contrib-python==4.5.5.62
+5. transformers 4.22.0
+6. numpy 1.23.3
+7. opencv-python-headless 4.6.0.66
+8. tini
+9. jq
+10. curl
+11. vim
+12. zip
+13. unzip
+14. wget
+15. nslookup
+16. onepanel SDK 1.0.1
+# 镜像cxyacr.azurecr.cn/shaiic/miniconda3.py39.opencv.go:v1.2的规格(2.2G):
 1. conda 4.12.0
 2. py3.9
 4. opencv-contrib-python==4.5.5.62
