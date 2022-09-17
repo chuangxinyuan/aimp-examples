@@ -7,7 +7,7 @@
 *.dylib
 *.pyc
 bin
-#__pycache__
+__pycache__
 
 # Test binary, build with `go test -c`
 *.test
