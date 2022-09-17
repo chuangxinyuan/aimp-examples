@@ -47,13 +47,13 @@ templates:
 
   - name: inference-model
     script:
-      image: 'continuumio/miniconda3'
+      image: 'cxyacr.azurecr.cn/shaiic/miniconda3.py39.opencv:v1.1'
       imagePullPolicy: IfNotPresent
       workingDir: '/mnt/src/{{workflow.parameters.project-name}}/aimp-serving/aimp-serving-test/{{workflow.parameters.sample-name}}'
       command:
         - sh
         - -c
-      args: [pip3 install requests;  pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple transformers; pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple numpy; pip3 install -i  https://pypi.tuna.tsinghua.edu.cn/simple onepanel-sdk==1.0.1; python3 run.py  ]
+      args: [python3 run.py  ]
     inputs:
       artifacts:
         - git:
