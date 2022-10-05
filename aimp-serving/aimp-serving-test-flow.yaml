@@ -1,18 +1,23 @@
 arguments:
   parameters:
-
     - name: project-url
+      displayName: Git Repo URL
+      hint: Git repo URL for the AI model Infer scripts
       value: 'https://github.com/chuangxinyuan/{{workflow.parameters.project-name}}.git'
+      visibility: private
     - name: project-name
       value: aimp-examples
+      visibility: private
     - displayName: Node pool
       hint: Name of node pool or group to run this workflow task
       name: sys-node-pool
       required: true
       type: select.nodepool
-      value: 'Standard_B8ms'
+      value: 'default'
       visibility: public
     - name: sample-name
+      displayName: AI Model Name
+      hint: Select a model from the model repo 
       type: select.select
       value: faster-rcnn-torchserve
       options:
