@@ -1,23 +1,23 @@
 arguments:
   parameters:
     - name: project-url
-      displayName: Git Repo URL
-      hint: Git repo URL for the AI model Infer scripts
+      displayName: Git REPO URL
+      hint: Git仓库URL模板
       value: 'https://github.com/chuangxinyuan/{{workflow.parameters.project-name}}.git'
-      visibility: private
     - name: project-name
       value: aimp-examples
-      visibility: private
-    - displayName: Node pool
-      hint: Name of node pool or group to run this workflow task
+      displayName: AI推理代码项目
+      hint: AI推理代码所在的项目名称
+    - displayName: 资源池
+      hint: 运行推理POD所在的资源池
       name: sys-node-pool
       required: true
       type: select.nodepool
       value: 'default'
       visibility: public
     - name: sample-name
-      displayName: AI Model Name
-      hint: Select a model from the model repo 
+      displayName: AI模型仓库
+      hint: 从模型列表中选择一个模型
       type: select.select
       value: faster-rcnn-torchserve
       options:
