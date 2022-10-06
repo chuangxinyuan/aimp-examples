@@ -4,6 +4,8 @@ arguments:
       displayName: Git REPO URL
       hint: Git仓库URL模板
       value: 'https://github.com/chuangxinyuan/{{workflow.parameters.project-name}}.git'
+      #please use gitee in istack due to network performance issue
+      #value: 'https://gitee.com/chuangxinyuan/{{workflow.parameters.project-name}}.git'
     - name: project-name
       value: aimp-examples
       displayName: AI推理代码项目
