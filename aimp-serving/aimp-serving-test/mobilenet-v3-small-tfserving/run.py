@@ -9,7 +9,7 @@ import numpy as np
 import requests
 import pickle
 from pprint import pprint
-
+import cv2
 # MUST import AIMP python SDK
 # import upper dir's python file
 sys.path.append("../..") 
@@ -27,18 +27,15 @@ infer_endpoint=aimpPredict.infer_endpoint
 #end init the aimpinferSDK
 
 # step 4 predict
-with open('./cat.pkl','rb') as f:
-    img_data = pickle.load(f)
+
+path = './cat.jpg'
+img = cv2.imread(path)
+img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+# For this model, the size of the input images is fixed to height x width = 224 x 224 pixels.
+img = cv2.resize(img,(224,224))
+img = img / 255.0
+img_data = np.expand_dims(img,axis = 0).tolist()
     
-#import cv2
-#import matplotlib.pyplot as plt
-#path = './cat1.jpg'
-#img = cv2.imread(path)
-#img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
-#img = cv2.resize(img,(224,224))
-#plt.imshow(img)
-#img = img / 255.0
-#img_data = np.expand_dims(img,axis = 0).tolist()
 
 data = {
     'instances': img_data
@@ -59,4 +56,4 @@ print('---Prediction RESULTS---')
 # skip cert check
 r = requests.post(infer_endpoint, headers=headers, data=json.dumps(data), verify=False)
 result = r.json()
-pprint(result)
+print('features: ', result['predictions'][0])

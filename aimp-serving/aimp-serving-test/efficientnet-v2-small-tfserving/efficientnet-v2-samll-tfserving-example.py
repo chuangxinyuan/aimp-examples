@@ -37,7 +37,7 @@ infer_endpoint=aimpPredict.infer_endpoint
 
 import cv2
 
-path = './cat1.jpg'
+path = './cat.jpg'
 img = cv2.imread(path)
 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 img = cv2.resize(img,(160,128))
@@ -64,7 +64,7 @@ print('---Prediction RESULTS---')
 # skip cert check
 r = requests.post(infer_endpoint, headers=headers, data=json.dumps(data), verify=False)
 result = r.json()
-pprint(result)
+print('prediction probs: ', result['predictions'][0])
 
 with open('imagenet1000_clsidx_to_labels.txt') as f:
     labels = eval(f.read())

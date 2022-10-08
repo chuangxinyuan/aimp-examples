@@ -43,13 +43,17 @@ print (infer_endpoint)
 pprint(headers)
 print('\n')
 
-with open('./img.pkl','rb') as f:
-    # shape of img_data: [1, 256, 256, 3]
-    img_data = pickle.load(f)
-    img_data = img_data/255.0
+import cv2
+
+
+org_img = cv2.imread('./cat.jpg')
+org_img = cv2.resize(org_img, (256,256))
+img = cv2.cvtColor(org_img, cv2.COLOR_BGR2RGB)
+img = np.expand_dims(img,axis=0).astype(np.float32)
+img = img / 255.0
 
 data = {
-    'instances': img_data.tolist()
+    'instances': img.tolist()
 }
 
 print('---Prediction RESULTS---')
@@ -57,12 +61,41 @@ print('---Prediction RESULTS---')
 #r = requests.post(endpoint, headers=headers, data=json.dumps(data), verify=False)
 # skip cert check
 r = requests.post(infer_endpoint, headers=headers, data=json.dumps(data), verify=False)
-pprint (r)
-result = r.json()
-pprint(result)
+
+result = r.json()['predictions'][0]
+
+parsed_ret = {}
+num_det = result['output_3']
+parsed_ret.update({'num_det': num_det})
+parsed_ret.update({'boxes': np.array(result['output_0'][:num_det])*256})
+parsed_ret.update({'probs': np.array(result['output_1'][:num_det])})
+parsed_ret.update({'labels': np.array([int(i) for i in result['output_2'][:num_det]])})
+
+print(parsed_ret)
+
+# cls_label 到 cls_name 可以从下面的coco_names进行查询
+coco_names = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light',
+        'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow',
+        'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee',
+        'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard',
+        'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple',
+        'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'couch',
+        'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone',
+        'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear',
+        'hair drier', 'toothbrush']  # class names
+
+
+for i in range(num_det):
+    label = parsed_ret['labels'][i]
+    x1, y1, x2, y2 = parsed_ret['boxes'][i]
+    prob = parsed_ret['probs'][i]
+    if prob > 0.3:
+        cv2.rectangle(org_img, (int(x1),int(y1)),(int(x2),int(y2)), color=(255,0,0))
+        cv2.putText(org_img, coco_names[label], (int(x1+10), int(x2+10)), 0, 0.75,(0,0,255))
+
+cv2.imwrite('./cat_det.jpg',  org_img)
 
 #result 说明
-
 #output_1: prob
 #output_0: xyxy boxes
 #output_2 : cls_label
@@ -73,16 +106,7 @@ pprint(result)
     'output_2': [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
  'output_3': 1}]}
 '''
-# cls_label 到 cls_name 可以从下面的coco128_names进行查询
-coco128_names = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light',
-        'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow',
-        'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee',
-        'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard',
-        'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple',
-        'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'couch',
-        'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone',
-        'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear',
-        'hair drier', 'toothbrush']  # class names
+
 
  
 

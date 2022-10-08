@@ -29,18 +29,15 @@ infer_endpoint=aimpPredict.infer_endpoint
 #end init the aimpinferSDK
 
 # step 4 predict
-with open('./cat.pkl','rb') as f:
-    img_data = pickle.load(f)
-    
-#import cv2
-#path = './cat1.jpg'
-#img = cv2.imread(path)
-#img = cv2.resize(img,(224,224))
-#img = img / 255.0
-#img = np.expand_dims(img,axis = 3).astype(np.float32)
-#img = np.transpose(img).astype('float32')
+import cv2
+path = './cat.jpg'
+img = cv2.imread(path)
+img = cv2.resize(img,(224,224))
+img = img / 255.0
+img = np.expand_dims(img,axis = 3).astype(np.float32)
+img = np.transpose(img).astype('float32')
 #print(img.shape)
-#img = img.tolist()
+img = img.tolist()
 
 
 data = {
@@ -49,7 +46,7 @@ data = {
     "name": "input.1",
     "shape": [1,3,224,224],
     "datatype": "FP32",
-    "data": img_data
+    "data": img
    }
    ]
 }

@@ -33,11 +33,12 @@ infer_endpoint=aimpPredict.infer_endpoint
 
 # step 4 predict
 tokenizer = BertTokenizer.from_pretrained("ydshieh/bert-base-uncased-yelp-polarity")
-inputs = tokenizer(["Hello, my dog is cute"]) #pos
+inputs_txt = ["Although this movie is fantastic,and my daughter likes it, I still hate it."]
+#inputs = tokenizer(["Hello, my dog is cute"]) #pos
 #inputs = tokenizer(["This movie is fantastic."]) #pos
 #inputs = tokenizer(["This movie is fantastic,and my daughter likes it."]) #pos
-#inputs = tokenizer(["Although this movie is fantastic,and my daughter likes it, I still hate it."]) #neg
-#inputs = tokenizer(["Although this movie is fantastic,and my daughter likes it, I still hate it due to the terrible plots."]) #neg
+inputs = tokenizer(inputs_txt) #neg
+#inputs = tokenizer(["i hate you "]) #neg
 
 data = {
    "inputs":[
@@ -67,7 +68,9 @@ print('---Prediction RESULTS---')
 r = requests.post(infer_endpoint, headers=headers, data=json.dumps(data), verify=False)
 result = r.json()
 
+print('inputs text: ', inputs_txt)
 print('prediction probs:  ', result['outputs'][0]['data'])
 
-labels = ['negtive','postive']
-labels[np.array(result).argmax()]
+labels = ['negative','positive']
+
+print('prediction label: ', labels[np.array(result['outputs'][0]['data']).argmax()])

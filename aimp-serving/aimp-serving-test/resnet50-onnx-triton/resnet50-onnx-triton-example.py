@@ -36,10 +36,11 @@ import cv2
 path = './cat.jpg'
 img = cv2.imread(path)
 img = cv2.resize(img,(224,224))
+img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 img = img / 255.0
-img = np.expand_dims(img,axis = 3).astype(np.float32)
-img = np.transpose(img).astype('float32')
-#print(img.shape)
+img = np.expand_dims(img,axis=0).astype(np.float32)
+img = np.transpose(img, (0,3,1,2))
+
 img = img.tolist()
 
 

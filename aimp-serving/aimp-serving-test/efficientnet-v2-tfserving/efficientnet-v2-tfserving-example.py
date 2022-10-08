@@ -32,13 +32,18 @@ infer_endpoint=aimpPredict.infer_endpoint
 #end init the aimpinferSDK
 
 # step 4 predict
-with open('./img.pkl','rb') as f:
-    img_data = pickle.load(f)
 
-data = {
-    'instances': img_data
-}
+import cv2
 
+path = './cat.jpg'
+img = cv2.imread(path)
+img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+img = cv2.resize(img,(480,480))
+
+img = img / 255.0
+img = np.expand_dims(img,axis = 0).tolist()
+
+data = {'instances': img}
 
 
 headers = {
@@ -58,7 +63,7 @@ print('---Prediction RESULTS---')
 # skip cert check
 r = requests.post(infer_endpoint, headers=headers, data=json.dumps(data), verify=False)
 result = r.json()
-pprint(result)
+pprint(result['predictions'][0])
 
 with open('imagenet1000_clsidx_to_labels.txt') as f:
     labels = eval(f.read())
