@@ -59,7 +59,7 @@ http://yelp-polarity-triton.mp.svc.cluster.local/v2/models/yelp-polarity-triton/
    * 以curl命令方式示例： curl -k -v -H 'Host: iris--mp.niuhongxing.cn' https://infer.dev.aimpcloud.cn:443/v1/models/iris:predict -d @./iris-input.json, 其中-k 是忽略证书错误
 
 ## 2. python SDK 方式
-* [参考：SDK文档](https://github.com/onepanelio/python-sdk)
+* [参考：SDK文档](https://github.com/chuangxinyuan/python-sdk)
 * 必须是python 3.7 版本，python 2.6不支持，如下的包版本供参考
    ``` bash
    # 设置python 3.7的基本运行环境
