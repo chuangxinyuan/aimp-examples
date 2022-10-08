@@ -50,6 +50,7 @@ print('---Prediction RESULTS---')
 # skip cert check
 r = requests.post(infer_endpoint, headers=headers, data=data, verify=False)
 result = r.json()
+print ("预测结果说明： 0->山鸢尾（setosa）、1->变色鸢尾（versicolor）、2->维吉尼亚鸢尾（virginica）")
 pprint(result)
 
 
