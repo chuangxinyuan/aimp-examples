@@ -57,6 +57,9 @@ templates:
       image: 'cxyacr.azurecr.cn/shaiic/miniconda3.py39.opencv:v1.1'
       imagePullPolicy: IfNotPresent
       workingDir: '/mnt/src/{{workflow.parameters.project-name}}/aimp-serving/aimp-serving-test/{{workflow.parameters.sample-name}}'
+      volumeMounts:
+        - name: output
+          mountPath: /mnt/output
       command:
         - sh
         - -c
@@ -67,3 +70,17 @@ templates:
             repo: '{{workflow.parameters.project-url}}'
           name: src
           path: '/mnt/src/{{workflow.parameters.project-name}}'
+    outputs:
+      artifacts:
+          - name: det
+            path: /mnt/output
+            
+volumeClaimTemplates:
+  - metadata:
+      name: output
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 5Mi
