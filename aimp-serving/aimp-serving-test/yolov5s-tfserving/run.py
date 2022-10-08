@@ -91,7 +91,7 @@ for i in range(num_det):
         cv2.rectangle(org_img, (int(x1),int(y1)),(int(x2),int(y2)), color=(255,0,0))
         cv2.putText(org_img, coco_names[label], (int(x1+10), int(x2+10)), 0, 0.75,(0,0,255))
 
-cv2.imwrite('./cat_det.jpg',  org_img)
+cv2.imwrite('/mnt/output/cat_det.jpg',  org_img)
 
 #result 说明
 #output_1: prob
