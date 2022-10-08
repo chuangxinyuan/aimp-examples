@@ -81,6 +81,6 @@ for ret in list1:
             img = cv2.rectangle(img, (x1, y1), (x2, y2), (255, 255, 0), 1)
             img = cv2.putText(img,k,(x1-5,y1-10),0,1,(0,0,0),1)
 
-cv2.imwrite('./cat_det.jpg', img)
+cv2.imwrite('/mnt/output/cat_det.jpg', img)
  
 
