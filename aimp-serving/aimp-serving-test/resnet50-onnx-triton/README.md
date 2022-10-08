@@ -3,6 +3,11 @@ The ResNet model is based on the Deep Residual Learning for Image Recognition pa
 # 参考
 https://pytorch.org/vision/stable/models.html
 
+## 算法介绍
+1. 算法名称：resnet50 （利用restnet50进行图像分类）
+2. 输入：[1,3,224,224]的tensor, 图像为224x224大小，RGB3通道的图片， 1代表batch_size大小
+3. 输出：1000维的向量，代表imagenet1000中的每一类的可能性的大小，具体类别名见  imagenet1000_clsidx_to_labels.txt
+
 # 模型准备方法
 
 ### 下载预训练模型，或训练模型并且转换为onnx 模型

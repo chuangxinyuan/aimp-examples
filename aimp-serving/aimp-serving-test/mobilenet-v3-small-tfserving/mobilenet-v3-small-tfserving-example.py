@@ -34,7 +34,7 @@ infer_endpoint=aimpPredict.infer_endpoint
     #img_data = pickle.load(f)
     
 import cv2
-path = './cat1.jpg'
+path = './cat.jpg'
 img = cv2.imread(path)
 img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 # For this model, the size of the input images is fixed to height x width = 224 x 224 pixels.
@@ -65,4 +65,6 @@ print('---Prediction RESULTS---')
 # skip cert check
 r = requests.post(infer_endpoint, headers=headers, data=json.dumps(data), verify=False)
 result = r.json()
-print(result)
+print('features: ', result['predictions'][0])
+
+

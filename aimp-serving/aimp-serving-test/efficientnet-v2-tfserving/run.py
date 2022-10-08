@@ -31,13 +31,18 @@ infer_host_FQDN=aimpPredict.infer_host_FQDN
 infer_endpoint=aimpPredict.infer_endpoint
 #end init the aimpinferSDK
 
+import cv2
 
-with open('./img.pkl','rb') as f:
-    img_data = pickle.load(f)
+path = './cat.jpg'
+img = cv2.imread(path)
+img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+img = cv2.resize(img,(480,480))
 
-data = {
-    'instances': img_data
-}
+img = img / 255.0
+img = np.expand_dims(img,axis = 0).tolist()
+
+data = {'instances': img}
+
 
 headers = {
     'onepanel-access-token': access_token,
@@ -54,7 +59,7 @@ print('---Prediction RESULTS---')
 # skip cert check
 r = requests.post(infer_endpoint, headers=headers, data=json.dumps(data), verify=False)
 result = r.json()
-pprint(result)
+pprint(result['predictions'][0])
 
 with open('imagenet1000_clsidx_to_labels.txt') as f:
     labels = eval(f.read())

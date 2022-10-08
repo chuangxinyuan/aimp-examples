@@ -29,7 +29,8 @@ infer_endpoint=aimpPredict.infer_endpoint
 #end init the aimpinferSDK
 
 tokenizer = BertTokenizer.from_pretrained("shibing624/text2vec-base-chinese")
-inputs = tokenizer(["如何更换花呗绑定银行卡"]) 
+inputs_txt = ["如何更换花呗绑定银行卡"]
+inputs = tokenizer(inputs_txt) 
 
 
 data = {
@@ -64,6 +65,6 @@ print('---Prediction RESULTS---')
 # skip cert check
 r = requests.post(infer_endpoint, headers=headers, data=json.dumps(data), verify=False)
 result = r.json()
-pprint(result)
-
+print('inputs sentence: ', inputs_txt)
 print('sentence embeddings:  ', result['outputs'][0]['data'])
+print(np.array(result['outputs'][0]['data']).shape)

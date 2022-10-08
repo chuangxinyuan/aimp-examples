@@ -43,7 +43,7 @@ print (infer_endpoint)
 pprint(headers)
 print('\n')
 
-path = './persons.jpg'
+path = './cat.jpg'
 image = open(path, 'rb') #open binary file in read mode
 image_read = image.read()
 image_64_encode = base64.b64encode(image_read)
@@ -60,19 +60,20 @@ print('---Prediction RESULTS---')
 # skip cert check
 r = requests.post(infer_endpoint, headers=headers, data=json.dumps(data), verify=False)
 result = r.json()
-print(result)
 
 pic_result = result['predictions'][0] #the result of one picture
+
+print(pic_result)
 
 ##screen result
 list1 = []
 for i in pic_result:
-    if i['score'] > 0.8:
+    if i['score'] > 0.5:
         list1.append(i)
 
 #draw the frame
 img = cv2.imread(path)
-img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+
 for ret in list1:
     for k, v in ret.items():
         if k == 'score':
@@ -80,8 +81,9 @@ for ret in list1:
         else:
             x1, y1, x2, y2 = [int(i) for i in v]
         
-            img = cv2.rectangle(img, (x1, y1), (x2, y2), (255, 255, 0), 6)
-            img = cv2.putText(img,k,(x1-5,y1-10),cv2.FONT_HERSHEY_COMPLEX,4,(0,0,0),4)
+            img = cv2.rectangle(img, (x1, y1), (x2, y2), (255, 255, 0), 1)
+            img = cv2.putText(img,k,(x1-5,y1-10),0,1,(0,0,0),1)
+cv2.imwrite('cat_det.jpg', img)
  
 
 
