@@ -12,7 +12,7 @@ iris的分类是一个典型的人工智能分类问题，选取的是比较典�
 ## Creating your own model and testing the SKLearn Server locally.
 To test the [Scikit-Learn](https://scikit-learn.org/stable/) server, first we need to generate a simple scikit-learn model using Python. 
 # 创建你的模型
-sklearn 模型文件格式是 joblib， 参考如下的例子创建自己的模型
+sklearn 机器学习模型文件格式是 joblib， 该模型文件格式为二进制优点是效率很高，参考如下的例子创建自己的模型
 
 * 创建模型示例如下：
 

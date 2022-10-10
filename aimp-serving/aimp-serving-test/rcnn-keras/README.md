@@ -4,7 +4,8 @@
 有如下关键字段，请参见示例模型定义文件：
 1. metadata.label "used-by", cvat会自动显示拥有该标签的模型
 1. metadata.annotations.spec是模型的预测分类，应用在cvat中，会在cvat选择自动标注时，显示在弹出的界面上
-1. metadata.annotations.modelName，是cvat中使用该模型的名字，可以和模型的名字不一致，应用在cvat中，会在cvat选择自动标注时，显示在弹出的界面上
+1. metadata.annotations.modelName，是cvat中使用该模型的名字，可以和模型的名字不一致，应用在cvat中，会在cvat选择自动标注时，显示在弹出的界面上，**注意**,请保持该字段中的label与实际label文件一致
+![示例](../../../pics/labels.jpg)
 1. metadata.annotations.framework: "tensorflow"， 请照抄该字段
 1. metadata.annotations.type: detector， 请照抄该字段
 
