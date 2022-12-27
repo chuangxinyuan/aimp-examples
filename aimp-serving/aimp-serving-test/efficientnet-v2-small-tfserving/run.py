@@ -45,7 +45,7 @@ img = np.expand_dims(img,axis = 0).tolist()
 data = {'instances': img}
 
 headers = {
-    'onepanel-access-token': access_token,
+    'infer-access-token': access_token,
     'Content-Type': 'application/json',
     'Host': infer_host_FQDN,
 }
