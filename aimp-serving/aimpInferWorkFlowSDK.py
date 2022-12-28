@@ -45,10 +45,7 @@ class aimpInfer:
             self.host = os.getenv("ONEPANEL_API_URL")
         access_token = onepanel.core.auth.get_infer_token(username=self.username, password=self.password,host=self.host)
         self.api_access_token = access_token
-        
-        #从AIMP的环境变量中读取API_ACCESS_TOKEN 和infer host，这个优先级最高，在名字空间范围内有效
-        if (os.getenv("API_ACCESS_TOKEN")):
-            self.api_access_token = os.getenv("API_ACCESS_TOKEN")
+
         if (os.getenv("INFER_HOST")):
             self.infer_host = os.getenv("INFER_HOST")
 
@@ -57,7 +54,7 @@ class aimpInfer:
         configuration = onepanel.core.api.Configuration(
         host=self.host,
         api_key={
-        'authorization': access_token
+        'authorization': self.api_access_token
         }
         )
         configuration.api_key_prefix['authorization'] = 'Bearer'
