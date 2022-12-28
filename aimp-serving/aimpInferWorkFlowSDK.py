@@ -67,6 +67,9 @@ class aimpInfer:
         try:
            ready = False
            while not ready:
+               pprint("namespace:" + self.namespace)
+               pprint("model_name:" + self.model_name)
+               pprint("api_access_token: " + self.api_access_token)
                api_response = api_instance.get_inference_service_v2(self.namespace, self.model_name)
                ready = api_response.ready
                endpoint = api_response.predict_url
