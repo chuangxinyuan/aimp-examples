@@ -22,9 +22,10 @@ aimpPredict=aimpInferSDK.aimpInfer()
 aimpPredict.namespace = 'mp'
 aimpPredict.model_name = 'yolov5s-tfserving'
 aimpPredict.username='admin'
-aimpPredict.token='5aed14f5bffc9f86fd0fb2745519f2ff'
-aimpPredict.aimp_host='http://onepanel.niuhongxing.cn/api'
-aimpPredict.infer_host='https://infer.dev.aimpcloud.cn/'
+aimpPredict.password='admin'
+#aimpPredict.token='5aed14f5bffc9f86fd0fb2745519f2ff'
+aimpPredict.aimp_host='http://portal.aimpcloud.cn/api'
+aimpPredict.infer_host='https://infer.aimpcloud.cn/'
 aimpPredict.getAccess()
 access_token=aimpPredict.api_access_token
 infer_host_FQDN=aimpPredict.infer_host_FQDN
@@ -33,7 +34,7 @@ infer_endpoint=aimpPredict.infer_endpoint
 
 # step 4 predict
 headers = {
-    'onepanel-access-token': access_token,
+    'infer-access-token': access_token,
     'Content-Type': 'application/json',
     'Host': infer_host_FQDN,
 }
