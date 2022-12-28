@@ -25,7 +25,7 @@ RUN apt-get -q update && \
 RUN pip3 install requests && \
     pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple transformers==4.22.0 && \
     pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple numpy==1.23.3 && \
-    pip3 install -i  https://pypi.tuna.tsinghua.edu.cn/simple onepanel-sdk==1.0.1 && \
+    pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple aimp-sdk==0.0.4 && \
     ####################
     # To support opencv, MUST do exactly the same including versions and sequence
     # MUST install this version to use cv2

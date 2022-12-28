@@ -18,12 +18,9 @@ from pprint import pprint
 
 class aimpInfer:
     # MUST specify according to your situation, host请注意URL的后缀api和infer_host后面的/
-    username = 'admin'
-    password = 'admin'
-    host='http://portal.aimpcloud.cn/api'
     namespace = ''
     model_name = ''
-    infer_host='https://infer.aimpcloud.cn/'
+    infer_host='https://infer.dev.aimpcloud.cn/'
 
     #used by inference
     api_access_token=''
@@ -37,13 +34,7 @@ class aimpInfer:
     def getAccess(self):
         # 获取用户访问onepanel的 access_token
         # If inside of Onepanel, get mounted service account token to use as API Key
-        if (os.getenv("USERNAME")):
-            self.username = os.getenv("USERNAME")
-        if (os.getenv("PASSWORD")):
-            self.password = os.getenv("PASSWORD")
-        if (os.getenv("ONEPANEL_API_URL")):
-            self.host = os.getenv("ONEPANEL_API_URL")
-        access_token = onepanel.core.auth.get_infer_token(username=self.username, password=self.password,host=self.host)
+        access_token = onepanel.core.auth.get_access_token()
         self.api_access_token = access_token
         
         #从AIMP的环境变量中读取API_ACCESS_TOKEN 和infer host，这个优先级最高，在名字空间范围内有效
@@ -52,10 +43,10 @@ class aimpInfer:
         if (os.getenv("INFER_HOST")):
             self.infer_host = os.getenv("INFER_HOST")
 
-        print('---ONEPANEL_API_URL----', self.host)
+        print('---ONEPANEL_API_URL----', os.getenv('ONEPANEL_API_URL'))
         # Configure API key authorization: Bearer
         configuration = onepanel.core.api.Configuration(
-        host=self.host,
+        host=os.getenv('ONEPANEL_API_URL'),
         api_key={
         'authorization': access_token
         }
@@ -70,7 +61,7 @@ class aimpInfer:
         try:
            ready = False
            while not ready:
-               api_response = api_instance.get_inference_service_v2(self.namespace, self.model_name)
+               api_response = api_instance.get_inference_service(self.namespace, self.model_name)
                ready = api_response.ready
                endpoint = api_response.predict_url
                print('---api_response.predict_url---')

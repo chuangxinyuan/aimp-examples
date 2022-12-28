@@ -54,7 +54,7 @@ templates:
 
   - name: inference-model
     script:
-      image: 'cxyacr.azurecr.cn/shaiic/miniconda3.py39.opencv:v1.1'
+      image: 'cxyacr.azurecr.cn/shaiic/miniconda3.py39.opencv:v1.2'
       imagePullPolicy: IfNotPresent
       workingDir: '/mnt/src/{{workflow.parameters.project-name}}/aimp-serving/aimp-serving-test/{{workflow.parameters.sample-name}}'
       volumeMounts:
