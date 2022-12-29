@@ -22,17 +22,17 @@
 
 1. 登陆中台，运行aimp-serving-examples 工作流，选择sample-name 下面的模型，然后执行，可以从流日志中查看相应的执行效果。查看aimp-serving/aimp-serving-test 目录下的具体模型目录中的run.py，了解程序运行的细节。
    1. 注意：请设置中台的环境变量INFER_HOST 为实际的值
-   2. AIMP 0.91版本请设置中台的环境变量API_ACCESS_TOKEN为在“AIMP外部使用SDK方式”时获取的API_ACCESS_TOKEN的值
+   2. AIMP 0.91版本请设置中台的环境变量USERNAME和PASSWORD为在“AIMP外部使用SDK方式”时获取的API_ACCESS_TOKEN的值
 2. 进入aimp-serving/aimp-serving-test 目录, 参考README.txt 进行测试。
    1. 注意：请更改 impPredict.model_name, aimpPredict.username, aimpPredict.token,aimpPredict.aimp_host,aimpPredict.infer_host 为实际的值 
    
 # 模型推理服务使用方式
-* 中台推理服务的地址是 https://infer.dev.aimpcloud.cn (实际的地址根据部署的情况不同会有差异，实际的地址请向管理员索取）。
+* 中台推理服务的地址是 https://infer.aimpcloud.cn (实际的地址根据部署的情况不同会有差异，实际的地址请向管理员索取）。
 * 仪电人工智能中台的地址和推理服务地址是不同的地址。如下示例中，假定中台的地址为http://onepanel.niuhongxing.cn ，推理服务的地址是 https://infer.dev.aimpcloud.cn。 则推理服务的使用方法如下：
 
 ## 准备工作：
 
-* 仪电人工智能中台的用户(username)和密码（token）
+* 仪电人工智能中台的用户(username)和密码（password）
 * AIMP和推理服务工作正常
 * 推理服务所在的名字空间(namespace)和模型的名字(name)。
 ``` bash
@@ -53,18 +53,18 @@ http://yelp-polarity-triton.mp.svc.cluster.local/v2/models/yelp-polarity-triton/
 * [API详细参考和示例： /apis/v1beta/service/{name} - AIMPInferExample (apifox.cn)](https://www.apifox.cn/apidoc/project-1485755/api-35503298)， inferExample目录中的3个API。或者参考文档 [AIMP_INFER_REST_APIs.html](./aimp-serving/AIMP_INFER_REST_APIs.html)
 * 端点中的地址请替换为中台的实际地址，注意后面有/api
 
-1. 获取推理服务的access_token： REST服务端点：http://onepanel.niuhongxing.cn/api ， POST /apis/v1beta1/auth/get_access_token ，body主要两个参数 ，aimp的用户名和token（从你的租户管理员获取相应的用户名和对应的token）， 返回 access_token。
-2. 获取推理服务的原始URL：REST服务端点：http://onepanel.niuhongxing.cn/api 。GET /apis/v1beta1/{namespace}/inferenceservice/{name}，header主要两个参数，namespace和 模型的名字name,返回原始的推理服务URL
-3. 进行相应的推理服务调用：REST服务端点：https://infer.dev.aimpcloud.cn ， POST /v1/models/iris:predict，header 中主要2个参数，onepanel_access_token（上述API调用返回的 access_token)和 HOST（原始的推理服务URL中截取的主机地址）
-   * 以curl命令方式示例： curl -k -v -H 'Host: iris--mp.niuhongxing.cn' https://infer.dev.aimpcloud.cn:443/v1/models/iris:predict -d @./iris-input.json, 其中-k 是忽略证书错误
+1. 获取推理服务的access_token： REST服务端点：http://portal.aimpcloud.cn/api ， POST /apis/v1beta1/auth/get_infer_token ，body主要两个参数 ，aimp的用户名和密码（从你的租户管理员获取相应的用户名和密码）， 返回 access_token。
+2. 获取推理服务的原始URL：REST服务端点：http://portal.aimpcloud.cn/api。GET /apis/v1beta2/{namespace}/inferenceservice/{name}，header主要两个参数，namespace和 模型的名字name,返回原始的推理服务URL
+3. 进行相应的推理服务调用：REST服务端点：https://infer.aimpcloud.cn ， POST /v1/models/iris:predict，header 中主要2个参数，infer_access_token（上述API调用返回的 access_token)和 HOST（原始的推理服务URL中截取的主机地址）
+   * 以curl命令方式示例： curl -k -v -H 'Host: iris--mp.aimpcloud.cn' https://infer.aimpcloud.cn:443/v1/models/iris:predict -d @./iris-input.json, 其中-k 是忽略证书错误
 
 ## 2. python SDK 方式
 * [参考：SDK文档](https://github.com/chuangxinyuan/python-sdk)
 * 必须是python 3.7 版本，python 2.6不支持，如下的包版本供参考
    ``` bash
    # 设置python 3.7的基本运行环境
-   pip install onepanel-sdk
-   pip install requests=2.25.1
+   pip install aimp-sdk==0.0.5
+   pip install requests==2.25.1
    pip install requests-oauthlib==1.3.1
    pip install numpy==1.21.6
    ```
@@ -95,7 +95,7 @@ http://yelp-polarity-triton.mp.svc.cluster.local/v2/models/yelp-polarity-triton/
     namespace = '根据实际情况填写'
     model_name = '根据实际情况填写'
     username='根据实际情况填写'
-    token='根据实际情况填写'
+    password='根据实际情况填写'
     aimp_host='http://根据实际情况填写/api'
     infer_host='https://根据实际情况填写/'
 
