@@ -11,7 +11,7 @@ python efficientnet-v2-tfserving-example.py
 
 # real examples as the following:
 root@dev-AIMP91-0:~/aimp-examples/aimp-serving# docker run -v `pwd`:/mnt -it cxyacr.azurecr.cn/shaiic/miniconda3.py39.opencv:v1.3  bash
-(base) root@c2dc88cd45f3: cd /mnt/aimp-serving-test/efficientnet-v2-tfserving
+(base) root@c2dc88cd45f3: cd /mnt/aimp-serving-test/yolox-onnx-triton
 (base) root@c2dc88cd45f3:/mnt/aimp-serving-test/yolox-onnx-triton# python yolox-onnx-triton-example.py
 
         ***************************************************************
