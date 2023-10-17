@@ -1,0 +1,19 @@
+
+apiVersion: "serving.kubeflow.org/v1beta1"
+kind: "InferenceService"
+metadata:
+  namespace: aimp
+  name: "gbdt"
+ 
+spec:
+  predictor:
+    sklearn:
+      resources:
+        limits:
+          cpu: 1
+          memory: 4Gi
+        requests:
+          cpu: 1
+          memory: 4Gi
+      runtimeVersion: v0.6.1
+      storageUri: "https://shaiicpublic.blob.core.chinacloudapi.cn/aimp-blob-test/artifacts/aimp/aimp/model/106/20231008090547.zip"

@@ -1,0 +1,18 @@
+apiVersion: "serving.kubeflow.org/v1beta1"
+kind: "InferenceService"
+metadata:
+  namespace: aimp
+  name: "deeplabv3-resnet-101-torchserve"
+
+spec:
+  predictor:
+    pytorch:
+      resources:
+        limits:
+          cpu: 2
+          memory: 8Gi
+        requests:
+          cpu: 1
+          memory: 4Gi
+      runtimeVersion: 0.4.0
+      storageUri: "https://shaiicpublic.blob.core.chinacloudapi.cn/aimp-blob-test/artifacts/aimp/aimp/model/126/20231010150536.zip"

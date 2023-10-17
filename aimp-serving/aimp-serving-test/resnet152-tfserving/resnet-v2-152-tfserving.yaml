@@ -1,0 +1,19 @@
+apiVersion: "serving.kubeflow.org/v1beta1"
+kind: "InferenceService"
+metadata:
+  namespace: aimp
+  name: "resnet-v2-152-tfserving"
+ 
+spec:
+  predictor:
+    tensorflow:
+      resources:
+        limits:
+          cpu: 2
+          memory: 8Gi
+        requests:
+          cpu: 1
+          memory: 4Gi
+      runtimeVersion: 2.2.0
+      storageUri: "https://shaiicpublic.blob.core.chinacloudapi.cn/aimp-blob-test/artifacts/aimp/aimp/model/118/20231009170040.zip"
+

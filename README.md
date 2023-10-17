@@ -14,6 +14,14 @@
 |resnet50|图像分类|resnet50-onnx- triton| [Triton Inference Server](https://github.com/triton-inference-server/server) | [Exported ONNX Model](https://github.com/onnx/tutorials#converting-to-onnx-format) | v2 | 20.10-py3 | [README](./aimp-serving/aimp-serving-test/resnet50-onnx-triton/README.md) |
 |mobilenet_v3_small|图像特征提取|mobilenet-v3-small-tfserving| [TFServing](https://www.tensorflow.org/tfx/guide/serving) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) | v1 | 2.2.0 | [README](./aimp-serving/aimp-serving-test/mobilenet-v3-small-tfserving/README.md) |
 |text2vec-base-chinese|中文句向量特征提取|text2vec-base-chinese-triton| [Triton Inference Server](https://github.com/triton-inference-server/server) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) | v2 | 20.10-py3 | [README](./aimp-serving/aimp-serving-test/text2vec-base-chinese-triton/README.md) |
+|xgboost|图像分类|xgboost| [XGBSERVER](https://github.com/kserve/kserve/tree/master/python/xgbserver) | [model](https://kserve.github.io/website/0.7/modelserving/v1beta1/xgboost/#training)文件后缀名为bst | v2 | —— | [README](./aimp-serving/aimp-serving-test/xgboost/README.md) |
+|resnet152|图像分类|resnet152-tfserving| [TFServing](https://www.tensorflow.org/tfx/guide/serving) | [TensorFlow SavedModel](https://www.tensorflow.org/guide/saved_model) | v1 | 2.2.0 | [README](./aimp-serving/aimp-serving-test/resnet152-tfserving/README.md) |
+|Random-Forest|图像分类|sklearn| [SKLearn KFServer](https://github.com/kubeflow/kfserving/tree/master/python/sklearnserver) | [Pickled Model](https://scikit-learn.org/stable/modules/model_persistence.html) 文件后缀为joblib | v1 | v0.6.1 | [README](./aimp-serving/aimp-serving-test/Random-Forest-sklearn/README.md) |
+|mnist-sklearn|图像分类|mnist-sklearn| [SKLearn KFServer](https://github.com/kubeflow/kfserving/tree/master/python/sklearnserver) | [Pickled Model](https://scikit-learn.org/stable/modules/model_persistence.html) 文件后缀为joblib | v1 | v0.6.1 | [README](./aimp-serving/aimp-serving-test/mnist-sklearn/README.md) |
+|lightgbm|图像分类|lightgbm| [LGBSERVER](https://github.com/kserve/kserve/tree/master/python/lgbserver) | [model](https://kserve.github.io/website/0.7/modelserving/v1beta1/lightgbm/#creating-your-own-model-and-testing-the-lightgbm-server)文件后缀名为bst | v1 | —— | [README](./aimp-serving/aimp-serving-test/lightgbm/README.md) |
+|GBDT-sklearn|图像分类|sklearn| [SKLearn KFServer](https://github.com/kubeflow/kfserving/tree/master/python/sklearnserver) | [Pickled Model](https://scikit-learn.org/stable/modules/model_persistence.html) 文件后缀为joblib | v1 | v0.6.1 | [README](./aimp-serving/aimp-serving-test/GBDT-sklearn/README.md) |
+|dencenet161|图像分类|dencenet161-torchserve| [TorchServe](https://pytorch.org/serve/server.html) | [Eager Model/TorchScript](https://pytorch.org/docs/master/generated/torch.save.html) | v1 | 0.4.0 | [README](./aimp-serving/aimp-serving-test/dencenet161-torchserve/README.md) |
+|deeplabv3-resnet-101|图像分割|deeplabv3-resnet-101-torchserve| [TorchServe](https://pytorch.org/serve/server.html) | [Eager Model/TorchScript](https://pytorch.org/docs/master/generated/torch.save.html) | v1 | 0.4.0 | [README](./aimp-serving/aimp-serving-test/deeplabv3-resnet-101-torchserve/README.md) |
 
 原生的功能和支持的AI模型类型列表和相应的例子请参见：
 [model servers](https://github.com/chuangxinyuan/aimp-kfserving/tree/master/docs/samples)
@@ -218,6 +226,19 @@ spec:
 1. 保存的模型文件名字须是model.joblib
 2. 模型训练代码，可以参考[例子](./aimp-serving/aimp-serving-test/iris-sklearn/iris-train.py)
 3. 打包： ` zip iris-sklearn.zip model.joblib`
+
+## xgboost模型准备
+
+- 模型结构为model.bst
+
+详细流程请参考aimp-serving-test\xgboost
+
+## LightGBM模型准备
+
+- 模型结构为model.bst
+
+详细流程请参考aimp-serving-test\lightgbm
+
 ## 上传模型文件
 上传到模型仓库对应的目录下（cv-models或nlp-models等），并生成可以下载的链接，在模型定义yaml的 uri字段中使用。
 

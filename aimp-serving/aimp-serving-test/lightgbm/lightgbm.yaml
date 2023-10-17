@@ -1,0 +1,17 @@
+apiVersion: "serving.kubeflow.org/v1beta1"
+kind: "InferenceService"
+metadata:
+  namespace: aimp
+  name: "lightgbm"
+spec:
+  predictor:
+    lightgbm:
+      resources:
+        limits:
+          cpu: 1
+          memory: 2Gi
+        requests:
+          cpu: 1
+          memory: 2Gi
+      storageUri: "https://shaiicpublic.blob.core.chinacloudapi.cn/aimp-blob-test/artifacts/aimp/aimp/model/112/20231009112324.zip"
+   

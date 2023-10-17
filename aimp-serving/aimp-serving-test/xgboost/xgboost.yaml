@@ -1,0 +1,17 @@
+apiVersion: "serving.kubeflow.org/v1beta1"
+kind: "InferenceService"
+metadata:
+  namespace: aimp
+  name: "xgboost"
+spec:
+  predictor:
+    xgboost:
+      resources:
+        limits:
+          cpu: 1
+          memory: 2Gi
+        requests:
+          cpu: 1
+          memory: 2Gi
+      protocolVersion: "v2"
+      storageUri: "https://shaiicpublic.blob.core.chinacloudapi.cn/aimp-blob-test/artifacts/aimp/aimp/model/42/20231008163013.zip"
